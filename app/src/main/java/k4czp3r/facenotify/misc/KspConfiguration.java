@@ -31,8 +31,8 @@ public class KspConfiguration {
 
 
     public String getDeviceName(){
-        String manufacturer = Build.MANUFACTURER.toUpperCase();
-        String model = Build.MODEL.toUpperCase();
+        String manufacturer = getProp("ro.product.vendor.manufacturer");
+        String model = getProp("ro.product.vendor.model");
         if(model.startsWith(manufacturer)){
             return model.replace(' ','_');
         }
@@ -58,6 +58,20 @@ public class KspConfiguration {
     }
     private boolean isOOS(){
         return  checkGetProp("Oxygen");
+    }
+    private String getProp(String value){
+        try{
+            Process getProp = Runtime.getRuntime().exec(new String[]{"/bin/sh","-c","getprop "+value});
+            BufferedReader getPropReader = new BufferedReader(new InputStreamReader(getProp.getInputStream()));
+
+            String result = getPropReader.readLine();
+            getPropReader.close();
+            return result;
+        } catch (Exception ex){
+            kspLog.error(TAG, ex.getMessage(), true);
+            ex.printStackTrace();
+        }
+        return "";
     }
     private boolean checkGetProp(String valueToCheck){
         try{
@@ -86,7 +100,7 @@ public class KspConfiguration {
         else if(isOmni()) detectionMode = kspConfig.DM_smartlock();
         else if(getDeviceName().contains("ONEPLUS")) detectionMode = kspConfig.DM_oneplus();
         else if(getDeviceName().contains("XIAOMI")) detectionMode = kspConfig.DM_miui();
-        else if(getDeviceName().contains("SAMSUNG")) detectionMode = kspConfig.DM_samsung();
+        else if(getDeviceName().contains("SAMSUNG")) detectionMode = kspConfig.DM_samsung_face();
         else detectionMode = kspConfig.DM_smartlock();
 
         kspPreferences.setDetectionMode(detectionMode);
@@ -111,7 +125,7 @@ public class KspConfiguration {
 
     //RegexFunctions
     public int getLocalTimeValue(String timeString){
-        kspLog.info(TAG, "Converting local time to readable (english) one...",false);
+        //kspLog.info(TAG, "Converting local time to readable (english) one...",false);
         timeString = convertLogcatTimeIfNeeded(timeString);
 
         Pattern pattern = Pattern.compile("^(?:(?:([01]?\\d|2[0-3]):)?([0-5]?\\d):)?([0-5]?\\d)$");
@@ -142,7 +156,7 @@ public class KspConfiguration {
         return new String(chars);
     }
     public int getLogcatTimeValue(String logcatLine){
-        kspLog.info(TAG, "Converting logcat time to readable (english) one...",false);
+        //kspLog.info(TAG, "Converting logcat time to readable (english) one...",false);
         logcatLine = convertLogcatTimeIfNeeded(logcatLine);
 
         Pattern pattern = Pattern.compile("\\d+-\\d+\\s+(\\d+):(\\d+):(\\d+)\\.(\\d+)");

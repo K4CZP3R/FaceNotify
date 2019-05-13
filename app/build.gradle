@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 
 ext.versionMajor = 1
 ext.versionMinor = 4
-ext.versionPatch = 2
+ext.versionPatch = 8
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -15,6 +15,14 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        release_alpha {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            versionNameSuffix "alpha"
+            resValue "string", "app_version", "${defaultConfig.versionName}"
+            resValue "string", "app_track", "${versionNameSuffix}"
+        }
         release_beta {
             minifyEnabled false
             shrinkResources false

@@ -7,7 +7,10 @@ public class KspConfig {
     private static final Map<String, String> oneplus = new HashMap<String, String>();
     private static final Map<String, String> smartlock = new HashMap<String, String>();
     private static final Map<String, String> miui = new HashMap<String, String>();
-    private static final Map<String, String> samsung = new HashMap<>();
+
+    private static final Map<String, String> samsung_intelligent = new HashMap<>();
+    private static final Map<String, String> samsung_iris = new HashMap<>();
+    private static final Map<String, String> samsung_face = new HashMap<>();
 
     private static final Map<String, Map<String, String>> phones = new HashMap<String, Map<String, String>>();
 
@@ -28,14 +31,27 @@ public class KspConfig {
         miui.put("valid","return 201");
 
 
-        samsung.put("detectLine","KeyguardFace: onAuthentication");
-        samsung.put("valid","Succeeded()");
-        samsung.put("readable","Samsung (S9)");
+
+        samsung_face.put("detectLine", "SemBioFaceServiceD: handleAuthenticated :");
+        samsung_face.put("valid", " 1");
+        samsung_face.put("readable", "Samsung (Face scan)");
+
+        samsung_iris.put("detectLine", "IrisService: handleAuthenticated :");
+        samsung_iris.put("valid", "true");
+        samsung_iris.put("readable", "Samsung (Iris scan)");
+
+        samsung_intelligent.put("detectLine", "IBS_BiometricsService: handleAuthenticated :");
+        samsung_intelligent.put("valid", "2");
+        samsung_intelligent.put("readable", "Samsung (Intelligent scan)");
+
 
         phones.put("oneplus", oneplus);
         phones.put("smartlock", smartlock);
         phones.put("miui", miui);
-        phones.put("samsung",samsung);
+
+        phones.put("samsung_face",samsung_face);
+        phones.put("samsung_iris",samsung_iris);
+        phones.put("samsung_intelligent", samsung_intelligent);
 
         phones_name.put("ONEPLUS_A6003", "OnePlus 6");
         phones_name.put("ONEPLUS_A6013", "OnePlus 6");
@@ -58,5 +74,14 @@ public class KspConfig {
     public String DM_oneplus(){
         return "oneplus";
     }
-    public String DM_samsung() {return "samsung";}
+
+    public String DM_samsung_iris() {
+        return "samsung_iris";
+    }
+    public String DM_samsung_face(){
+        return "samsung_face";
+    }
+    public String DM_samsung_intelligent(){
+        return "samsung_intelligent";
+    }
 }

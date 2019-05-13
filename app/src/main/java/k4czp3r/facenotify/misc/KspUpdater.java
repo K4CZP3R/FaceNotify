@@ -74,7 +74,10 @@ public class KspUpdater {
                 try{
                     String serverVersion = response.getString("version");
 
-                    String appVersion = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
+                    String appVersion = context.getString(R.string.app_version);
+                    kspLog.info(TAG, "appVersion: "+appVersion,true);
+                    kspLog.info(TAG, "appTrack: "+app_track,true);
+                    kspLog.info(TAG, "serverVersion: "+serverVersion,true);
                     if(!appVersion.equals(serverVersion)){
                         kspLog.info(TAG, "Update required!",true);
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);

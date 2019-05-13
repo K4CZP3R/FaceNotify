@@ -291,13 +291,18 @@
         <item>OnePlus (OxygenOS)</item>
         <item>AOSP (smartlock)</item>
         <item>Xiaomi (MIUI)</item>
-        <item>Samsung (S9)</item>
+        <item>Samsung (Face scan)</item>
+        <item>Samsung (Iris scan)</item>
+        <item>Samsung (Intelligent scan)</item>
     </string-array>
     <string-array name="pref_fr_detect_mode__values">
         <item>oneplus</item>
         <item>smartlock</item>
         <item>miui</item>
-        <item>samsung</item>
+        <item>samsung_face</item>
+        <item>samsung_iris</item>
+        <item>samsung_intelligent</item>
+
     </string-array>
 
 </resources>

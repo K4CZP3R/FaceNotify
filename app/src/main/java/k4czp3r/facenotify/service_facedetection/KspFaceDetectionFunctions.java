@@ -22,9 +22,9 @@ public class KspFaceDetectionFunctions {
     KspConfiguration kspConfiguration = new KspConfiguration();
     KspLog kspLog = new KspLog();
 
-    public boolean custom_isFaceUnlocked(String detectionLogcatLine){
-        List<String> logs = kspFaceDetectionLogcat.readLogs(detectionLogcatLine,"","00:00:00");
-        return logs.size() > 0;
+    public boolean custom_isFaceUnlocked(String detectionLogcatLine, String time){
+
+        return kspFaceDetectionLogcat.foundInLogs(detectionLogcatLine);
     }
 
     public boolean isFaceUnlocked(String startDetectDate){

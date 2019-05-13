@@ -28,9 +28,27 @@ public class KspFaceDetectionLogcat {
            ex.printStackTrace();
        }
     }
+    public boolean foundInLogs(String includeString){
+        try {
+            Process processLogcat = Runtime.getRuntime().exec(new String[]{"/bin/sh","-c","logcat -d -T 512"});
+            BufferedReader readerLogcat = new BufferedReader(new InputStreamReader(processLogcat.getInputStream()));
+            String iterLine;
 
+            int count = 0;
+            while ((iterLine = readerLogcat.readLine()) != null) {
+                if (iterLine.contains(includeString)) {
+                    count += 1;
+                }
+            }
+            return count > 0;
+        }
+        catch (Exception ex){
+            kspLog.error(TAG, ex.getMessage(),true);
+        }
+        return false;
+    }
     public List<String> readLogs(String includeStringLogcat, String filterTag, String detectStartTime){
-        kspLog.info(TAG, "Searching for: "+includeStringLogcat,false);
+        kspLog.info(TAG, "Searching for: '"+includeStringLogcat+"'",false);
         //TODO: Implement filterTag when it will be needed
         float debug_startTime = System.currentTimeMillis();
 
@@ -38,7 +56,7 @@ public class KspFaceDetectionLogcat {
         int count=0;
         boolean logsAfterDetectTime = false;
         try{
-            Process processLogcat = Runtime.getRuntime().exec(new String[]{"/bin/sh","-c","logcat -d -T 512"});
+            Process processLogcat = Runtime.getRuntime().exec(new String[]{"/bin/sh","-c","logcat -d -T 512"}); //512
             BufferedReader readerLogcat = new BufferedReader(new InputStreamReader(processLogcat.getInputStream()));
 
             String iterLine;
@@ -48,7 +66,6 @@ public class KspFaceDetectionLogcat {
                 if(!logsAfterDetectTime && (kspConfiguration.getLogcatTimeValue(iterLine) >= kspConfiguration.getLocalTimeValue(detectStartTime))){
                     logsAfterDetectTime=true;
                 }
-
                 //allow only after detect hourminsec
                 if(logsAfterDetectTime) {
                     if (iterLine.contains(includeStringLogcat)) {
