@@ -1,0 +1,17 @@
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- These settings headers are only used on tablets. -->
+
+    <header
+        android:fragment="k4czp3r.facenotify.ui.SettingsActivity$GeneralPreferenceFragment"
+        android:icon="@drawable/ic_info_black_24dp"
+        android:title="@string/pref_general_header" />
+
+    <header
+        android:fragment="k4czp3r.facenotify.ui.SettingsActivity$FrPreferenceFragment"
+        android:icon="@drawable/ic_sync_black_24dp"
+        android:title="@string/pref_face_recognition_header" />
+
+
+
+</preference-headers>
