@@ -15,17 +15,26 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        release_beta {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            versionNameSuffix "beta"
+            resValue "string", "app_version", "${defaultConfig.versionName}"
+            resValue "string", "app_track", "${versionNameSuffix}"
+        }
         release {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            versionNameSuffix ".gplayrelease"
-            //versionNameSuffix ".prerelease"
-            resValue "string", "app_version", "${defaultConfig.versionName}${versionNameSuffix}"
+            versionNameSuffix "release"
+            resValue "string", "app_version", "${defaultConfig.versionName}"
+            resValue "string", "app_track", "${versionNameSuffix}"
         }
         debug {
-            versionNameSuffix ".debug"
-            resValue "string", "app_version", "${defaultConfig.versionName}${versionNameSuffix}"
+            versionNameSuffix "debug"
+            resValue "string", "app_version", "${defaultConfig.versionName}"
+            resValue "string", "app_track", "${versionNameSuffix}"
         }
     }
     packagingOptions {

@@ -22,6 +22,7 @@ public class KspUpdater {
 
     private static String kspUpdateCheckURL = "https://kspfacenotify.kacperswebsite.xyz/check";
     private static String kspChangelogURL = "https://kspfacenotify.kacperswebsite.xyz/changelog";
+    private static String kspServerBackend = "https://kspfacenotify.kacperswebsite.xyz/b/";
 
     private static String TAG = KspUpdater.class.getCanonicalName();
     KspLog kspLog = new KspLog();
@@ -31,8 +32,11 @@ public class KspUpdater {
         boolean needToShowIt = kspPreferences.preferenceReadBoolean(context.getString(R.string.pref_new_version));
         if(!needToShowIt) return;
 
+        String app_track = context.getString(R.string.app_track);
+        String serverUrl = kspServerBackend+app_track;
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.GET, kspChangelogURL, null, new Response.Listener<JSONObject>() {
+                Request.Method.GET, serverUrl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -60,18 +64,22 @@ public class KspUpdater {
 
     }
     public void KspAppUpdateCheck(Context context){
+        String app_track = context.getString(R.string.app_track);
+        String serverUrl = kspServerBackend+app_track;
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.GET, kspUpdateCheckURL, null, new Response.Listener<JSONObject>() {
+                Request.Method.GET, serverUrl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try{
-                    String serverVersion = response.getString("latest_version");
+                    String serverVersion = response.getString("version");
+
                     String appVersion = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
                     if(!appVersion.equals(serverVersion)){
                         kspLog.info(TAG, "Update required!",true);
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
                         builder.setTitle("Update ready!");
-                        builder.setMessage("There is a new update. Go to XDA and download it! ("+serverVersion+")");
+                        builder.setMessage("There is a new update. Go to Google Play and download it! ("+serverVersion+")");
                         builder.show();
                     }
                     else{
