@@ -19,30 +19,34 @@ android {
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            versionNameSuffix "alpha"
+            String versionTrack = "alpha"
+            versionNameSuffix ".${versionTrack}"
             resValue "string", "app_version", "${defaultConfig.versionName}"
-            resValue "string", "app_track", "${versionNameSuffix}"
+            resValue "string", "app_track", "${versionTrack}"
         }
         release_beta {
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            versionNameSuffix "beta"
+            String versionTrack = "beta"
+            versionNameSuffix ".${versionTrack}"
             resValue "string", "app_version", "${defaultConfig.versionName}"
-            resValue "string", "app_track", "${versionNameSuffix}"
+            resValue "string", "app_track", "${versionTrack}"
         }
         release {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            versionNameSuffix "release"
+            String versionTrack = "release"
+            versionNameSuffix ".${versionTrack}"
             resValue "string", "app_version", "${defaultConfig.versionName}"
-            resValue "string", "app_track", "${versionNameSuffix}"
+            resValue "string", "app_track", "${versionTrack}"
         }
         debug {
-            versionNameSuffix "debug"
+            String versionTrack = "debug"
+            versionNameSuffix ".${versionTrack}"
             resValue "string", "app_version", "${defaultConfig.versionName}"
-            resValue "string", "app_track", "${versionNameSuffix}"
+            resValue "string", "app_track", "${versionTrack}"
         }
     }
     packagingOptions {
