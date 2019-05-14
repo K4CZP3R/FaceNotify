@@ -19,11 +19,26 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import k4czp3r.facenotify.R;
+import k4czp3r.facenotify.misc.KspLog;
 
 public class KspAnotherService extends Service {
     private static final int ID_SERVICE = 1338;
+    private static String TAG = KspAnotherService.class.getCanonicalName();
+    KspLog kspLog = new KspLog();
+    KspBroadcastHandler KspBroadcastHandler = new KspBroadcastHandler();
 
-
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        kspLog.info(TAG, "onDestroy",false);
+        try {
+            kspLog.info(TAG, "unregistering receiver",false);
+            unregisterReceiver(KspBroadcastHandler);
+        }
+        catch (Exception ex){
+            kspLog.error(TAG, "Error while trying to stop receiver:"+ex.getMessage(),true);
+        }
+    }
     @Nullable
     @Override
     public IBinder onBind(Intent intent){
@@ -49,7 +64,7 @@ public class KspAnotherService extends Service {
         filter.addAction(Intent.ACTION_SCREEN_ON);
         filter.addAction(Intent.ACTION_SCREEN_OFF);
         filter.addAction(Intent.ACTION_USER_PRESENT);
-        KspBroadcastHandler KspBroadcastHandler = new KspBroadcastHandler();
+
         registerReceiver(KspBroadcastHandler, filter, null, handler);
 
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
