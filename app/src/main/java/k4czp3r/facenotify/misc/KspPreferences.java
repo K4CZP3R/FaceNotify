@@ -33,16 +33,32 @@ public class KspPreferences {
         editor.apply();
     }
     public int preferenceReadInt(String prefName){
-        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(FaceNotifyApp.getAppContext());
-        return settings.getInt(prefName, -1);
+        try{
+            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(FaceNotifyApp.getAppContext());
+            return settings.getInt(prefName, -1);
+        }
+        catch (Exception ex){
+            Log.e(TAG, ex.getMessage());
+        }
+        return -1;
     }
     public String preferenceReadString( String prefName) {
-        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(FaceNotifyApp.getAppContext());
-        return settings.getString(prefName, "undefined");
+        try {
+            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(FaceNotifyApp.getAppContext());
+            return settings.getString(prefName, "undefined");
+        } catch (Exception ex){
+            Log.e(TAG, ex.getMessage());
+        }
+        return "undefined";
     }
     public boolean preferenceReadBoolean(String prefName){
-        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(FaceNotifyApp.getAppContext());
-        return settings.getBoolean(prefName, false);
+        try {
+            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(FaceNotifyApp.getAppContext());
+            return settings.getBoolean(prefName, false);
+        } catch (Exception ex){
+            Log.e(TAG, ex.getMessage());
+        }
+        return false;
     }
 
     public boolean firstRun(){
@@ -66,7 +82,6 @@ public class KspPreferences {
     public void setFirstRun(String value){
         preferenceSaveString( FaceNotifyApp.getAppContext().getString(R.string.pref_first_boot), value);
     }
-
 
     public void setDefaultPreferences(){
         Context context = FaceNotifyApp.getAppContext();
