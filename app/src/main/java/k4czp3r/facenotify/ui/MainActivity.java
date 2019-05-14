@@ -8,18 +8,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
-
-import java.util.List;
 
 import k4czp3r.facenotify.R;
 import k4czp3r.facenotify.misc.KspLog;
 import k4czp3r.facenotify.misc.KspUpdater;
 import k4czp3r.facenotify.service.KspAnotherService;
-import k4czp3r.facenotify.service.KspNewFgService;
 import k4czp3r.facenotify.service_facedetection.KspFaceDetectionFunctions;
 
 import static com.topjohnwu.superuser.internal.InternalUtils.getContext;
@@ -48,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
             else {
-                startService(new Intent(getContext(), KspNewFgService.class));
+                startService(new Intent(getContext(), KspAnotherService.class));
                 Toast.makeText(this, getString(R.string.btn_start_service_value_started), Toast.LENGTH_LONG).show();
                 finish();
             }
