@@ -18,21 +18,19 @@ import k4czp3r.facenotify.misc.KspPreferences;
 public class KspFaceDetectionFunctions {
     private static String TAG = KspFaceDetectionFunctions.class.getCanonicalName();
     private KspFaceDetectionLogcat kspFaceDetectionLogcat = new KspFaceDetectionLogcat();
-    KspPreferences kspPreferences = new KspPreferences();
-    KspConfiguration kspConfiguration = new KspConfiguration();
-    KspLog kspLog = new KspLog();
+    private KspPreferences kspPreferences = new KspPreferences();
+    private KspConfiguration kspConfiguration = new KspConfiguration();
+    private KspLog kspLog = new KspLog();
 
-    public boolean custom_isFaceUnlocked(String detectionLogcatLine, String time){
-
+    public boolean custom_isFaceUnlocked(String detectionLogcatLine){
         return kspFaceDetectionLogcat.foundInLogs(detectionLogcatLine);
     }
 
-    public boolean isFaceUnlocked(String startDetectDate){
-        //Log.v(TAG, startDetectDate);
-        //Add only logs after start of kspface
+    public boolean isFaceUnlocked(long startDetectDateMs){
+        kspLog.info(TAG, "Will filter logcats from: "+startDetectDateMs,false);
 
-        List<String> logs = kspFaceDetectionLogcat.readLogs(kspConfiguration.getDetectionLogcatLine(),"*:D",startDetectDate);
-        kspLog.info(TAG, "Logs size: "+String.valueOf(logs.size()),false);
+        List<String> logs = kspFaceDetectionLogcat.readLogs(kspConfiguration.getDetectionLogcatLine(),"*:D",startDetectDateMs);
+        kspLog.info(TAG, "Logs size: "+logs.size(),false);
         if(logs.size() == 0){
             return false;
         }

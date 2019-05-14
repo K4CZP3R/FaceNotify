@@ -1,18 +1,23 @@
 package k4czp3r.facenotify.service_facedetection;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Handler;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 import k4czp3r.facenotify.FaceNotifyApp;
-import k4czp3r.facenotify.KspAppConfiguration;
+
 import k4czp3r.facenotify.R;
 import k4czp3r.facenotify.misc.KspLog;
 import k4czp3r.facenotify.misc.KspPreferences;
+
 
 public class KspFaceDetectionMain {
     private static String TAG = KspFaceDetectionMain.class.getCanonicalName();
@@ -23,6 +28,7 @@ public class KspFaceDetectionMain {
 
     private static boolean repeatCheck_continueChecking = true;
     private int repeatCheck_currentCheck = 0;
+
     private int repeatCheck_maxChecks = 120; //will hold phone max 120*25ms
     private static int repeatSpeed = 100;
 
@@ -32,11 +38,11 @@ public class KspFaceDetectionMain {
     public class RepeatCheck implements Runnable {
         private String TAG_RC =RepeatCheck.class.getCanonicalName();
         int config_delayAfterFaceUnlock;
-        String startDetectDate;
-
-        RepeatCheck(int config_delayAfterFaceUnlock, String startDetectDate){
+        long startDetectDateMs;
+        long startTime = System.currentTimeMillis();
+        RepeatCheck(int config_delayAfterFaceUnlock, long startDetectDateMs){
             this.config_delayAfterFaceUnlock = config_delayAfterFaceUnlock;
-            this.startDetectDate = startDetectDate;
+            this.startDetectDateMs = startDetectDateMs;
         }
 
 
@@ -45,12 +51,15 @@ public class KspFaceDetectionMain {
             kspLog.info(TAG_RC, "============",false);
             kspLog.info(TAG_RC, "Check no."+repeatCheck_currentCheck,false);
 
-            if(kspFaceDetectionFunctions.isFaceUnlocked(this.startDetectDate)){
+            if(kspFaceDetectionFunctions.isFaceUnlocked(this.startDetectDateMs)){
                 kspLog.info(TAG_RC, "[OK] Face recognized!",false);
-                kspLog.info(TAG_RC, String.format("Will show notification in %1$sms",config_delayAfterFaceUnlock),false);
+                kspLog.info(TAG_RC,"This took "+(System.currentTimeMillis()-startTime)+"ms",true);
 
+
+                kspLog.info(TAG_RC, String.format("Will show notification in %1$sms",config_delayAfterFaceUnlock),false);
                 repeatCheck_handler.postDelayed(new FaceDetectedAction(),config_delayAfterFaceUnlock);
                 repeatCheck_continueChecking = false;
+                repeatCheck_currentCheck=0;
             }
             else{
                 kspLog.warn(TAG_RC, "Face not found!",false);
@@ -116,10 +125,9 @@ public class KspFaceDetectionMain {
 
 
         kspLog.info(TAG, "Posting repeatcheck as delayed",false);
-        DateFormat df = new SimpleDateFormat("HH:mm:ss");
-        Date date = new Date();
-        String currentTime = df.format(date);
-        repeatCheck_handler.postDelayed(new RepeatCheck(delayAfterFaceDetection, currentTime),100);
+        ZonedDateTime startOfToday = LocalDate.now().atStartOfDay(ZoneId.systemDefault());
+        long currentTimeMs = System.currentTimeMillis() - startOfToday.toEpochSecond() * 1000;
+        repeatCheck_handler.postDelayed(new RepeatCheck(delayAfterFaceDetection, currentTimeMs),100);
     }
 
 
