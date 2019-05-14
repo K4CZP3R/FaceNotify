@@ -174,7 +174,7 @@
     <string name="tv_option3_key">Samsung (not working)</string>
     <string name="tv_how_to">Lock your device and unlock it using your face!\nValues should update,\nif you see true, use this option in settings!</string>
 
-    <!-- KspNewFgService.java -->
+    <!-- KspANotherService.java -->
     <string name="notification_boot_title">FaceNotify - Ready to start</string>
     <string name="notification_boot_text">Click this notification to start FaceNotify service!</string>
 
@@ -184,7 +184,30 @@
     <!-- Hidden preferences -->
     <string name="pref_first_boot">kspFirstBoot</string>
     <string name="pref_new_version">kspNewVersion</string>
+    <!-- Preferences tools xml -->
+    <string name="pref_tools__header">Tools</string>
+    <string name="pref_restore_defaults__key">kspRestoreDefaults</string>
+    <string name="pref_restore_defaults__summary">Will fix problems with notifications appearance</string>
+    <string name="pref_restore_defaults__title">Restore defaults</string>
 
+    <string name="pref_fix_logcat__key">kspFixLogcat</string>
+    <string name="pref_fix_logcat__summary">Click me if nothing happens when recognizing your face!</string>
+    <string name="pref_fix_logcat__title">Fix logs</string>
+
+    <string name="pref_run_tester__key">kspRunTester</string>
+    <string name="pref_run_tester__summary">Check if app supports your phone!</string>
+    <string name="pref_run_tester__title">Run Tester</string>
+
+    <!-- Preferences app logger xml -->
+    <string name="pref_app_logger__header">App logger</string>
+
+    <string name="pref_log_to_file__key">kspLogToFile</string>
+    <string name="pref_log_to_file__summary">Log app to file (Documents/FaceNotify.txt)</string>
+    <string name="pref_log_to_file__title">Save log to file</string>
+
+    <string name="pref_wipe_log_file__key">kspWipeLogFile</string>
+    <string name="pref_wipe_log_file__summary">Clears log file</string>
+    <string name="pref_wipe_log_file__title">Wipe log file</string>
     <!-- Preferences general xml -->
     <string name="pref_general_header">General</string>
 
@@ -211,25 +234,6 @@
     <string name="pref_send_feedback__summary">Send me your feedback!</string>
     <string name="pref_send_feedback__title">Send feedback</string>
 
-    <string name="pref_restore_defaults__key">kspRestoreDefaults</string>
-    <string name="pref_restore_defaults__summary">Will fix problems with notifications appearance</string>
-    <string name="pref_restore_defaults__title">Restore defaults</string>
-
-    <string name="pref_fix_logcat__key">kspFixLogcat</string>
-    <string name="pref_fix_logcat__summary">Click me if nothing happens when recognizing your face!</string>
-    <string name="pref_fix_logcat__title">Fix logs</string>
-
-    <string name="pref_run_tester__key">kspRunTester</string>
-    <string name="pref_run_tester__summary">Check if app supports your phone!</string>
-    <string name="pref_run_tester__title">Run Tester</string>
-
-    <string name="pref_log_to_file__key">kspLogToFile</string>
-    <string name="pref_log_to_file__summary">Log app to file (Documents/FaceNotify.txt)</string>
-    <string name="pref_log_to_file__title">Save log to file</string>
-
-    <string name="pref_wipe_log_file__key">kspWipeLogFile</string>
-    <string name="pref_wipe_log_file__summary">Clears log file</string>
-    <string name="pref_wipe_log_file__title">Wipe log file</string>
 
     <string name="pref_ignore_fn_start__key">kspIgnoreStartTime</string>
     <string name="pref_ignore_fn_start__summary">From which time, always show notification content</string>

@@ -146,7 +146,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     protected boolean isValidFragment(String fragmentName) {
         return PreferenceFragment.class.getName().equals(fragmentName)
                 || GeneralPreferenceFragment.class.getName().equals(fragmentName)
-                || FrPreferenceFragment.class.getName().equals(fragmentName);
+                || FrPreferenceFragment.class.getName().equals(fragmentName)
+                || AppLoggerPreferenceFragment.class.getName().equals(fragmentName)
+                || ToolsPreferenceFragment.class.getName().equals(fragmentName);
     }
 
     /**
@@ -175,7 +177,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             KspConfig kspConfig = new KspConfig();
             Preference current_device = findPreference(getString(R.string.pref_current_device__key));
             KspConfiguration kspConfiguration = new KspConfiguration();
-            current_device.setSummary(kspConfig.getPhoneNames().getOrDefault(kspConfiguration.getDeviceName(),"null"));
+            //current_device.setSummary(kspConfig.getPhoneNames().getOrDefault(kspConfiguration.getDeviceName(),"null"));
+            current_device.setSummary(kspConfiguration.getDeviceName());
 
             Preference app_version = findPreference(getString(R.string.pref_app_version__key));
             try{
@@ -217,62 +220,15 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 }
             });*/
 
-            KspFaceDetectionFunctions kspFaceDetectionFunctions = new KspFaceDetectionFunctions();
-            Preference restore_default_settings = findPreference(getString(R.string.pref_restore_defaults__key));
-            restore_default_settings.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    kspFaceDetectionFunctions.setNotificationVisibilityToDefault();
-                    Snackbar.make(getView(), "Restored to default!", Snackbar.LENGTH_LONG).setAction("Action",null).show();
-                    return true;
-                }
-            });
 
-            KspFaceDetectionLogcat kspFaceDetectionLogcat = new KspFaceDetectionLogcat();
-            Preference fix_logcat = findPreference(getString(R.string.pref_fix_logcat__key));
-            fix_logcat.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    kspFaceDetectionLogcat.clearLogs();
-                    Snackbar.make(getView(), "Magically fixed it! (I hope it)", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                    return true;
-                }
-            });
 
-            Preference run_tester = findPreference(getString(R.string.pref_run_tester__key));
-            run_tester.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    startActivity(new Intent(FaceNotifyApp.getAppContext(), CompCheck.class));
-                    return true;
-                }
-            });
 
-            Preference log_to_file = findPreference(getString(R.string.pref_log_to_file__key));
-            log_to_file.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    KspPreferences kspPreferences = new KspPreferences();
-                    Snackbar.make(getView(), "Changed to: "+String.valueOf(kspPreferences.preferenceReadBoolean( getString(R.string.pref_log_to_file__key))),Snackbar.LENGTH_LONG).setAction("Action",null).show();
-                    if(kspPreferences.preferenceReadBoolean(getString(R.string.pref_log_to_file__key))){
-                        if(ContextCompat.checkSelfPermission(FaceNotifyApp.getAppContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-                            kspPreferences.preferenceSaveBoolean(getString(R.string.pref_log_to_file__key),false);
-                            Snackbar.make(getView(), "You need to grant file read/write permission!",Snackbar.LENGTH_LONG).setAction("Action",null).show();
-                        }
-                    }
-                    return true;
-                }
-            });
 
-            Preference wipe_log_file = findPreference(getString(R.string.pref_wipe_log_file__key));
-            wipe_log_file.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    KspLog kspLog = new KspLog();
-                    kspLog.wipeLogFile();
-                    return false;
-                }
-            });
+
+
+
+
+
         }
 
         @Override
@@ -290,11 +246,57 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
 
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public static class ToolsPreferenceFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.pref_tools);
+            setHasOptionsMenu(true);
 
-    /**
-     * This fragment shows data and sync preferences only. It is used when the
-     * activity is showing a two-pane settings UI.
-     */
+            Preference run_tester = findPreference(getString(R.string.pref_run_tester__key));
+            run_tester.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    startActivity(new Intent(FaceNotifyApp.getAppContext(), CompCheck.class));
+                    return true;
+                }
+            });
+
+            KspFaceDetectionLogcat kspFaceDetectionLogcat = new KspFaceDetectionLogcat();
+            Preference fix_logcat = findPreference(getString(R.string.pref_fix_logcat__key));
+            fix_logcat.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    kspFaceDetectionLogcat.clearLogs();
+                    Snackbar.make(getView(), "Magically fixed it! (I hope it)", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    return true;
+                }
+            });
+
+            KspFaceDetectionFunctions kspFaceDetectionFunctions = new KspFaceDetectionFunctions();
+            Preference restore_default_settings = findPreference(getString(R.string.pref_restore_defaults__key));
+            restore_default_settings.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    kspFaceDetectionFunctions.setNotificationVisibilityToDefault();
+                    Snackbar.make(getView(), "Restored to default!", Snackbar.LENGTH_LONG).setAction("Action",null).show();
+                    return true;
+                }
+            });
+        }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            int id = item.getItemId();
+
+            if (id == android.R.id.home) {
+                startActivity(new Intent(getActivity(), SettingsActivity.class));
+                return true;
+            }
+            return super.onOptionsItemSelected(item);
+        }
+    }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static class FrPreferenceFragment extends PreferenceFragment {
@@ -316,6 +318,54 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
 
 
+        }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            int id = item.getItemId();
+
+            if (id == android.R.id.home) {
+                startActivity(new Intent(getActivity(), SettingsActivity.class));
+                return true;
+            }
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public static class AppLoggerPreferenceFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.pref_app_logger);
+            setHasOptionsMenu(true);
+
+
+            Preference wipe_log_file = findPreference(getString(R.string.pref_wipe_log_file__key));
+            wipe_log_file.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    KspLog kspLog = new KspLog();
+                    kspLog.wipeLogFile();
+                    return false;
+                }
+            });
+
+            Preference log_to_file = findPreference(getString(R.string.pref_log_to_file__key));
+            log_to_file.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    KspPreferences kspPreferences = new KspPreferences();
+                    Snackbar.make(getView(), "Changed to: "+String.valueOf(kspPreferences.preferenceReadBoolean( getString(R.string.pref_log_to_file__key))),Snackbar.LENGTH_LONG).setAction("Action",null).show();
+                    if(kspPreferences.preferenceReadBoolean(getString(R.string.pref_log_to_file__key))){
+                        if(ContextCompat.checkSelfPermission(FaceNotifyApp.getAppContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                            kspPreferences.preferenceSaveBoolean(getString(R.string.pref_log_to_file__key),false);
+                            Snackbar.make(getView(), "You need to grant file read/write permission!",Snackbar.LENGTH_LONG).setAction("Action",null).show();
+                        }
+                    }
+                    return true;
+                }
+            });
         }
 
         @Override

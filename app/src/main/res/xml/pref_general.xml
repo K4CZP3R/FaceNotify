@@ -24,28 +24,8 @@
         android:summary="@string/pref_send_feedback__summary"
         android:title="@string/pref_send_feedback__title"
         />-->
-    <Preference
-        android:key="@string/pref_restore_defaults__key"
-        android:summary="@string/pref_restore_defaults__summary"
-        android:title="@string/pref_restore_defaults__title"
-        />
-    <Preference
-        android:key="@string/pref_fix_logcat__key"
-        android:summary="@string/pref_fix_logcat__summary"
-        android:title="@string/pref_fix_logcat__title"
-        />
-    <Preference
-        android:key="@string/pref_run_tester__key"
-        android:summary="@string/pref_run_tester__summary"
-        android:title="@string/pref_run_tester__title"/>
-    <CheckBoxPreference
-        android:key="@string/pref_log_to_file__key"
-        android:summary="@string/pref_log_to_file__summary"
-        android:title="@string/pref_log_to_file__title"/>
-    <Preference
-        android:key="@string/pref_wipe_log_file__key"
-        android:summary="@string/pref_wipe_log_file__summary"
-        android:title="@string/pref_wipe_log_file__title"/>
+
+
 
     <!--<k4czp3r.facenotify.misc.TimePreference
         android:key="@string/pref_ignore_fn_start__key"

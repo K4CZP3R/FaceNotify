@@ -12,6 +12,16 @@
         android:icon="@drawable/ic_sync_black_24dp"
         android:title="@string/pref_face_recognition_header" />
 
+    <header
+        android:fragment="k4czp3r.facenotify.ui.SettingsActivity$AppLoggerPreferenceFragment"
+        android:icon="@drawable/about_icon_email"
+        android:title="@string/pref_app_logger__header"/>
+
+    <header
+        android:fragment="k4czp3r.facenotify.ui.SettingsActivity$ToolsPreferenceFragment"
+        android:icon="@color/about_item_icon_color"
+        android:title="@string/pref_tools__header"/>
+
 
 
 </preference-headers>
