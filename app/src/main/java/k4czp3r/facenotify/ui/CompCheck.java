@@ -1,5 +1,6 @@
 package k4czp3r.facenotify.ui;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,65 +39,52 @@ public class CompCheck extends AppCompatActivity {
 
 
     private void checkAllOptions(){
-        DateFormat df = new SimpleDateFormat("HH:mm:ss");
-        Date date = new Date();
-        String currentTime = df.format(date);
-        kspLog.info(TAG, "Option 1 - "+kspConfig.getPhones().get(kspConfig.DM_miui()).get("readable"),true);
-        boolean option1 = kspFaceDetectionFunctions.custom_isFaceUnlocked(kspConfig.getPhones().get(kspConfig.DM_miui()).get("detectLine"),currentTime);
+        TextView[] option_value = new TextView[]{
+                findViewById(R.id.textView_option1_value),
+                findViewById(R.id.textView_option2_value),
+                findViewById(R.id.textView_option3_value),
+                findViewById(R.id.textView_option4_value),
+                findViewById(R.id.textView_option5_value),
+                findViewById(R.id.textView_option6_value),
 
-        kspLog.info(TAG, "Option 2 - "+kspConfig.getPhones().get(kspConfig.DM_oneplus()).get("readable"),true);
-        boolean option2 = kspFaceDetectionFunctions.custom_isFaceUnlocked(kspConfig.getPhones().get(kspConfig.DM_oneplus()).get("detectLine"),currentTime);
-
-        kspLog.info(TAG, "Option 3 - "+kspConfig.getPhones().get(kspConfig.DM_smartlock()).get("readable"),true);
-        boolean option3 = kspFaceDetectionFunctions.custom_isFaceUnlocked(kspConfig.getPhones().get(kspConfig.DM_smartlock()).get("detectLine"),currentTime);
-
-        kspLog.info(TAG, "Option 4 -"+kspConfig.getPhones().get(kspConfig.DM_samsung_face()).get("readable"),true);
-        boolean option4 = kspFaceDetectionFunctions.custom_isFaceUnlocked(kspConfig.getPhones().get(kspConfig.DM_samsung_face()).get("detectLine"),currentTime);
-
-        kspLog.info(TAG, "Option 5 -"+kspConfig.getPhones().get(kspConfig.DM_samsung_iris()).get("readable"),true);
-        boolean option5 = kspFaceDetectionFunctions.custom_isFaceUnlocked(kspConfig.getPhones().get(kspConfig.DM_samsung_iris()).get("detectLine"),currentTime);
-
-        kspLog.info(TAG, "Option 6 -"+kspConfig.getPhones().get(kspConfig.DM_samsung_intelligent()).get("readable"),true);
-        boolean option6 = kspFaceDetectionFunctions.custom_isFaceUnlocked(kspConfig.getPhones().get(kspConfig.DM_samsung_intelligent()).get("detectLine"),currentTime);
+        };
+        TextView[] option_key = new TextView[]{
+                findViewById(R.id.textView_option1_key),
+                findViewById(R.id.textView_option2_key),
+                findViewById(R.id.textView_option3_key),
+                findViewById(R.id.textView_option4_key),
+                findViewById(R.id.textView_option5_key),
+                findViewById(R.id.textView_option6_key),
+        };
 
 
-        TextView option1_value = findViewById(R.id.textView_option1_value);
-        TextView option1_key = findViewById(R.id.textView_option1_key);
-        option1_key.setText(kspConfig.getPhones().get(kspConfig.DM_miui()).get("readable"));
-        option1_value.setText(String.valueOf(option1));
+        String[] detect_type = new String[]{
+                kspConfig.DM_miui(),
+                kspConfig.DM_oneplus(),
+                kspConfig.DM_smartlock(),
+                kspConfig.DM_samsung_face(),
+                kspConfig.DM_samsung_iris(),
+                kspConfig.DM_samsung_intelligent()
+        };
 
+        for(int n = 0; n<detect_type.length; n++){
+            TextView current_option_key = option_key[n];
+            TextView current_option_value = option_value[n];
+            String current_detect_type =  detect_type[n];
 
-        TextView option2_value = findViewById(R.id.textView_option2_value);
-        TextView option2_key = findViewById(R.id.textView_option2_key);
-        option2_key.setText(kspConfig.getPhones().get(kspConfig.DM_oneplus()).get("readable"));
-        option2_value.setText(String.valueOf(option2));
+            boolean detect_result = kspFaceDetectionFunctions.custom_isFaceUnlocked(kspConfig.getPhones().get(current_detect_type).get("detectLine_v2"));
+            current_option_key.setText(kspConfig.getPhones().get(current_detect_type).get("readable"));
+            current_option_value.setText(String.valueOf(detect_result));
 
-        TextView option3_value = findViewById(R.id.textView_option3_value);
-        TextView option3_key = findViewById(R.id.textView_option3_key);
-        option3_key.setText(kspConfig.getPhones().get(kspConfig.DM_smartlock()).get("readable"));
-        option3_value.setText(String.valueOf(option3));
+            if(detect_result){
+                current_option_key.setTextColor(Color.GREEN);
+                current_option_value.setTextColor(Color.GREEN);
+            }
+            else{
+                current_option_key.setTextColor(Color.RED);
+                current_option_value.setTextColor(Color.RED);
+            }
 
-        TextView option4_value = findViewById(R.id.textView_option4_value);
-        TextView option4_key = findViewById(R.id.textView_option4_key);
-        option4_key.setText(kspConfig.getPhones().get(kspConfig.DM_samsung_face()).get("readable"));
-        option4_value.setText(String.valueOf(option4));
-
-        TextView option5_value = findViewById(R.id.textView_option5_value);
-        TextView option5_key = findViewById(R.id.textView_option5_key);
-        option5_key.setText(kspConfig.getPhones().get(kspConfig.DM_samsung_iris()).get("readable"));
-        option5_value.setText(String.valueOf(option5));
-
-        TextView option6_value = findViewById(R.id.textView_option6_value);
-        TextView option6_key = findViewById(R.id.textView_option6_key);
-        option6_key.setText(kspConfig.getPhones().get(kspConfig.DM_samsung_intelligent()).get("readable"));
-        option6_value.setText(String.valueOf(option6));
-
-
-
-
-
-
-
-
+        }
     }
 }
