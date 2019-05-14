@@ -13,6 +13,7 @@ public class KspBroadcastHandler extends BroadcastReceiver {
 
     public static String TAG = KspBroadcastHandler.class.getCanonicalName();
     KspLog kspLog = new KspLog();
+    KspFaceDetectionMain kspFaceDetectionMain = new KspFaceDetectionMain();
     @Override
     public void onReceive(Context context, Intent intent){
         kspLog.info(TAG, "receiving broadcast",false);
@@ -21,7 +22,7 @@ public class KspBroadcastHandler extends BroadcastReceiver {
         }
 
         kspLog.info(TAG,"Action: "+intent.getAction(),false);
-        KspFaceDetectionMain kspFaceDetectionMain = new KspFaceDetectionMain();
+
         if(intent.getAction().equals(Intent.ACTION_SCREEN_OFF)){
             kspLog.info(TAG, "Screen off event; hiding notifications",true);
             kspFaceDetectionMain.startScreenOffAction();
