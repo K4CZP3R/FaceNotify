@@ -10,18 +10,22 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import k4czp3r.facenotify.FaceNotifyApp;
+import k4czp3r.facenotify.R;
 import k4czp3r.facenotify.misc.KspConfiguration;
 import k4czp3r.facenotify.misc.KspLog;
+import k4czp3r.facenotify.misc.KspPreferences;
 
 public class KspFaceDetectionLogcat {
 
     private static String TAG = KspFaceDetectionLogcat.class.getCanonicalName();
     private KspConfiguration kspConfiguration = new KspConfiguration();
-    KspLog kspLog = new KspLog();
+    private KspLog kspLog = new KspLog();
+    private KspPreferences kspPreferences = new KspPreferences();
 
     public void clearLogs(){
        try {
-           Process process = new ProcessBuilder().command("logcat", "-c").redirectErrorStream(true).start();
+           Process process = new ProcessBuilder().command("/bin/sh -c logcat -c").redirectErrorStream(true).start();
        }
        catch (Exception ex){
            kspLog.error(TAG, ex.getMessage(),true);
@@ -29,14 +33,16 @@ public class KspFaceDetectionLogcat {
        }
     }
     public boolean foundInLogs(String includeString){
+
+        String[] logcatCommand = new String[]{"/bin/sh","-c","logcat -d -T 2048 -e \""+includeString+"\""};
         try {
-            Process processLogcat = Runtime.getRuntime().exec(new String[]{"/bin/sh","-c","logcat -d -T 512"});
+            Process processLogcat = Runtime.getRuntime().exec(logcatCommand);
             BufferedReader readerLogcat = new BufferedReader(new InputStreamReader(processLogcat.getInputStream()));
             String iterLine;
 
             int count = 0;
             while ((iterLine = readerLogcat.readLine()) != null) {
-                if (iterLine.contains(includeString)) {
+                if(iterLine.contains(includeString)) {
                     count += 1;
                 }
             }
@@ -47,31 +53,32 @@ public class KspFaceDetectionLogcat {
         }
         return false;
     }
-    public List<String> readLogs(String includeStringLogcat, String filterTag, String detectStartTime){
-        kspLog.info(TAG, "Searching for: '"+includeStringLogcat+"'",false);
-        //TODO: Implement filterTag when it will be needed
-        float debug_startTime = System.currentTimeMillis();
 
+
+    public List<String> readLogs(String includeStringLogcat, String filterTag, long detectStartTimeMs){
+        kspLog.info(TAG, "Searching for: '"+includeStringLogcat+"'",false);
+        String[] logcatCommand = new String[]{"/bin/sh","-c","logcat -d -e \""+includeStringLogcat+"\""};
+
+
+        //TODO: Implement filterTag when it will be needed
         List<String> listLogcatMirror = new ArrayList<>();
         int count=0;
         boolean logsAfterDetectTime = false;
         try{
-            Process processLogcat = Runtime.getRuntime().exec(new String[]{"/bin/sh","-c","logcat -d -T 512"}); //512
+            Process processLogcat = Runtime.getRuntime().exec(logcatCommand);
             BufferedReader readerLogcat = new BufferedReader(new InputStreamReader(processLogcat.getInputStream()));
 
             String iterLine;
-
             while((iterLine= readerLogcat.readLine())!= null){
                 count=count+1;
-                if(!logsAfterDetectTime && (kspConfiguration.getLogcatTimeValue(iterLine) >= kspConfiguration.getLocalTimeValue(detectStartTime))){
+                if(iterLine.contains("beginning of")) continue;
+                if(!logsAfterDetectTime && (kspConfiguration.getLogcatTimeInMs(iterLine) >= detectStartTimeMs)){
                     logsAfterDetectTime=true;
                 }
                 //allow only after detect hourminsec
                 if(logsAfterDetectTime) {
-                    if (iterLine.contains(includeStringLogcat)) {
-                        kspLog.info(TAG, "Adding to logcat list: '"+iterLine+"'",false);
-                        listLogcatMirror.add(iterLine);
-                    }
+                    kspLog.info(TAG, "Adding to logcat list: '" + iterLine + "'", false);
+                    listLogcatMirror.add(iterLine);
                 }
             }
             readerLogcat.close();
@@ -81,7 +88,6 @@ public class KspFaceDetectionLogcat {
             kspLog.error(TAG, "Error while reading logcat: "+e.getMessage(),true);
             e.printStackTrace();
         }
-        kspLog.info(TAG, String.format("Scanned %1$s lines",count),false);
         return listLogcatMirror;
 
     }

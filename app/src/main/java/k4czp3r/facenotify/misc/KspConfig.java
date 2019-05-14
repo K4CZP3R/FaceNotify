@@ -19,29 +19,35 @@ public class KspConfig {
 
     public KspConfig(){
         oneplus.put("detectLine","FacelockTrust");
+        oneplus.put("detectLine_v2", "FacelockTrust,");
         oneplus.put("readable", "OnePlus");
         oneplus.put("valid",",true");
 
         smartlock.put("detectLine","Unlock state:");
+        smartlock.put("detectLine_v2","Unlock state:");
         smartlock.put("readable","AOSP (Smartlock)");
         smartlock.put("valid","UNLOCK_STATE_ALLOW");
 
         miui.put("detectLine","FaceAuthManager: compare");
+        miui.put("detectLine_v2", "compare return");
         miui.put("readable","Xiaomi (MIUI)");
-        miui.put("valid","return 201");
+        miui.put("valid","201");
 
 
 
         samsung_face.put("detectLine", "SemBioFaceServiceD: handleAuthenticated :");
-        samsung_face.put("valid", " 1");
+        samsung_face.put("detectLine_v2","handleAuthenticated :");
+        samsung_face.put("valid", ": 1");
         samsung_face.put("readable", "Samsung (Face scan)");
 
         samsung_iris.put("detectLine", "IrisService: handleAuthenticated :");
-        samsung_iris.put("valid", "true");
+        samsung_iris.put("detectLine_v2","handleAuthenticated :");
+        samsung_iris.put("valid", ": true");
         samsung_iris.put("readable", "Samsung (Iris scan)");
 
         samsung_intelligent.put("detectLine", "IBS_BiometricsService: handleAuthenticated :");
-        samsung_intelligent.put("valid", "2");
+        samsung_intelligent.put("detectLine_v2","handleAuthenticated :");
+        samsung_intelligent.put("valid", ": 2");
         samsung_intelligent.put("readable", "Samsung (Intelligent scan)");
 
 
