@@ -31,8 +31,10 @@ public class KspConfiguration {
 
 
     public String getDeviceName(){
-        String manufacturer = getProp("ro.product.vendor.manufacturer");
-        String model = getProp("ro.product.vendor.model");
+        String manufacturer = Build.MANUFACTURER.toUpperCase();
+        String model = Build.MODEL.toUpperCase();
+        kspLog.info(TAG,"Phone manu: "+manufacturer,false);
+        kspLog.info(TAG, "Phone model: "+model,false);
         if(model.startsWith(manufacturer)){
             return model.replace(' ','_');
         }
@@ -40,15 +42,14 @@ public class KspConfiguration {
     }
 
     public boolean phoneModelCheck(){
+        if(getDeviceName().contains("samsung")) return true;
+        if(getDeviceName().contains("oneplus")) return true;
+        if(isOOS()) return true;
+        if(isOmni()) return true;
+        if(isMIUI()) return true;
 
-        if(!kspConfig.getPhoneNames().getOrDefault(getDeviceName(), "null").equals("null")){
-            kspLog.info(TAG, "Device is supported",true);
-            return  true;
-        }
-        else{
-            kspLog.warn(TAG, "Device is probably not supported!",true);
-            return false;
-        }
+        kspLog.warn(TAG, "This device is probably not supported",false);
+        return false;
     }
     private boolean isOmni(){
         return checkGetProp("OmniROM");
@@ -115,7 +116,7 @@ public class KspConfiguration {
 
     public String getDetectionLogcatLine(){
         String dDm = kspPreferences.getDetectionMode();
-        return kspConfig.getPhones().get(dDm).get("detectLine");
+        return kspConfig.getPhones().get(dDm).get("detectLine_v2"); //TODO: CHANGE
     }
 
     public String getDetectionUnlockValid(){
@@ -123,25 +124,21 @@ public class KspConfiguration {
         return kspConfig.getPhones().get(dDm).get("valid");
     }
 
-    //RegexFunctions
-    public int getLocalTimeValue(String timeString){
-        //kspLog.info(TAG, "Converting local time to readable (english) one...",false);
-        timeString = convertLogcatTimeIfNeeded(timeString);
 
-        Pattern pattern = Pattern.compile("^(?:(?:([01]?\\d|2[0-3]):)?([0-5]?\\d):)?([0-5]?\\d)$");
-        Matcher matcher = pattern.matcher(timeString);
-
-        while(matcher.find()){
-            int detectHour = Integer.parseInt(matcher.group(1));
-            int detectMinute = Integer.parseInt(matcher.group(2));
-            int detectSecond = Integer.parseInt(matcher.group(3));
-            return (100*detectHour)+(10*detectMinute)+(1*detectSecond);
+    public boolean convertTimeNeeded(String logcatLine){
+        for(int i=0; i<logcatLine.length(); i++){
+            char ch = logcatLine.charAt(i);
+            if(ch >= 0x0660 && ch <= 0x0669){
+                return true;
+            }
+            else if(ch >= 0x06f0 && ch <= 0x06F9){
+                return true;
+            }
         }
-        return 0;
+        return false;
     }
-
-
     public String convertLogcatTimeIfNeeded(String logcatLine){
+
         char[] chars = new char[logcatLine.length()];
         for(int i=0; i<logcatLine.length(); i++){
             char ch = logcatLine.charAt(i);
@@ -155,20 +152,23 @@ public class KspConfiguration {
         }
         return new String(chars);
     }
-    public int getLogcatTimeValue(String logcatLine){
-        //kspLog.info(TAG, "Converting logcat time to readable (english) one...",false);
-        logcatLine = convertLogcatTimeIfNeeded(logcatLine);
+    public long getLogcatTimeInMs(String logcatLine){
+        if(convertTimeNeeded(logcatLine)){
+            logcatLine = convertLogcatTimeIfNeeded(logcatLine);
+        }
 
         Pattern pattern = Pattern.compile("\\d+-\\d+\\s+(\\d+):(\\d+):(\\d+)\\.(\\d+)");
         Matcher matcher = pattern.matcher(logcatLine);
 
-        while(matcher.find()){
-            int logcatHour=Integer.parseInt(matcher.group(1));
-            int logcatMinute=Integer.parseInt(matcher.group(2));
-            int logcatSecond=Integer.parseInt(matcher.group(3));
-            return (100*logcatHour)+(10*logcatMinute)+(1*logcatSecond);
+        if(matcher.find()){
+            return Long.parseLong(matcher.group(1)) * 3600000L
+                    + Long.parseLong(matcher.group(2)) * 60000
+                    + Long.parseLong(matcher.group(3)) * 1000
+                    + Long.parseLong(matcher.group(4));
         }
-        return 0;
+        else{
+            throw new IllegalArgumentException("Invalid format '"+logcatLine+"'");
+        }
 
     }
 
