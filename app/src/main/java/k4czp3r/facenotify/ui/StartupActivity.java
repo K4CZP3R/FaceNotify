@@ -20,16 +20,21 @@ import com.topjohnwu.superuser.Shell;
 import k4czp3r.facenotify.FaceNotifyApp;
 import k4czp3r.facenotify.R;
 import k4czp3r.facenotify.misc.KspConfiguration;
+import k4czp3r.facenotify.misc.KspLog;
 import k4czp3r.facenotify.misc.KspPreferences;
 
 public class StartupActivity extends AppCompatActivity {
     KspPreferences kspPreferences = new KspPreferences();
     KspConfiguration kspConfiguration = new KspConfiguration();
+    KspLog kspLog = new KspLog();
+    private static String TAG = StartupActivity.class.getCanonicalName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startup);
         boolean skipToMain = true;
+
+        kspLog.info(TAG, "first run: "+kspPreferences.firstRun(),true);
 
         // <editor-fold desc="preferences check">
         if(kspPreferences.firstRun()){
@@ -58,6 +63,7 @@ public class StartupActivity extends AppCompatActivity {
         else{
             skipToMain=false;
             tv_adb_permission_status.setText(adb_permGranted);
+            kspPreferences.setFirstRun("true");
         }
 
         //Check log permissions
