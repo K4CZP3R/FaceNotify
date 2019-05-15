@@ -33,7 +33,6 @@ public class StartupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startup);
         boolean skipToMain = true;
-
         kspLog.info(TAG, "first run: "+kspPreferences.firstRun(),true);
 
         // <editor-fold desc="preferences check">
