@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Face Notify</string>
+    <string name="app_name" translatable="false">Face Notify</string>
 
 
     <!-- activity_startup.xml -->
@@ -51,100 +51,10 @@
     <string name="btn_stopService_onClick_toast_stopped">Service is stopped!</string>
     <string name="btn_stopService_onClick_toast_already">Service is already disabled!</string>
 
-    <string name="KspAppConfiguration_firstRun_howTo_title">How to make it work:</string>
-    <string name="KspAppConfiguration_firstRun_howTo_msg">1. Disable \'auto unlock once screen is on\' in Settings->Security and Lock Screen->Face Unlock\n2. Allow root rights for this app\n\n3. Disable battery optimizations (optional)\n4. Start service\n5. You can hide app\'s notification (it will work in the background)</string>
-    <string name="KspAppConfiguration_toast_rootCheck">Checking for root rights!</string>
-    <string name="KspAppConfiguration_rootDenied">Root has not been granted! ;(</string>
-    <string name="KspAppConfiguration_toast_rootGranted">Root has been granted!</string>
-    <string name="KspAppConfiguration_kspRooted_notDetected_title">ROOT not detected</string>
-    <string name="KspAppConfiguration_kspRooted_notDetected_msg">This app can\'t run without a root access!\nDo you want to check root access again?\n(Clear root settings in Magisk for this app)</string>
-    <string name="KspAppConfiguration_firstRun_neutralButton">OK</string>
-    <string name="KspAppConfiguration_firstRun_negativeButton">Exit</string>
-    <string name="KspAppConfiguration_kspRooted_positiveButton">Yes</string>
-    <string name="KspAppConfiguration_kspRooted_onClick_title">A restart is required</string>
-    <string name="KspAppConfiguration_kspRooted_onClick_msg">To perform a root check one more time.</string>
-    <string name="KspAppConfiguration_kspRooted_negativeButton">No</string>
-    <string name="KspAppConfiguration_kspRooted_negative_onClick">This app can\'t run without a root access!</string>
-
-
     <string name="action_settings">Settings</string>
 
     <string name="title_activity_ksp_main">Face Notify</string>
     <string name="title_activity_ksp_settings">Settings</string>
-
-    <!--<! prefs
-    <string name="pref_key_ksp_phoneModelChecked">kspPhoneModelChecked</string>
-    <string name="pref_key_ksp_firstRunCompleted">kspFirstRunCompleted</string>
-    <string name="pref_key_ksp_root">kspRoot</string>
-    <- Settings_general
-    <string name="pref_header_general">General</string>
-    <string name="pref_title_current_device">Your device</string>
-    <string name="pref_key_current_device">kspDevice</string>
-
-    <string name="pref_title_device_supported">Device supported</string>
-    <string name="pref_key_device_supported">kspDeviceSupported</string>
-
-    <string name="pref_key_send_feedback">kspSendFeedback</string>
-    <string name="pref_title_send_feedback">Send feedback</string>
-    <string name="pref_summary_send_feedback">Send me your feedback!</string>
-
-    <string name="pref_key_restore_defaults_lock_screen">kspRestoreDefaults</string>
-    <string name="pref_title_restore_defaults_lock_screen">Restore to defaults</string>
-    <string name="pref_summary_restore_defaults_lock_screen">Will fix problems with notifications appearance</string>
-
-
-    <!- Settings_face_recognition
-    <string name="pref_title_face_recognition_settings">Face recognition settings</string>
-    <string name="pref_header_face_recognition">Face recognition</string>
-
-    <string name="pref_title_fr_delay">Delay after face is recognized</string>
-    <string name="pref_key_fr_delay">frDelay</string>
-    <string-array name="pref_fr_delay_titles">
-        <item>0 seconds</item>
-        <item>1 second</item>
-        <item>2 seconds</item>
-        <item>5 seconds</item>
-        <item>8 seconds</item>
-    </string-array>
-    <string-array name="pref_fr_delay_values">
-        <item>0</item>
-        <item>1000</item>
-        <item>2000</item>
-        <item>5000</item>
-        <item>8000</item>
-    </string-array>
-
-    <string name="pref_title_fr_hide_type">Notification hide type</string>
-    <string name="pref_key_fr_hide_type">frHideType</string>
-    <string name="pref_value_fr_hide_type_content">lock_screen_allow_private_notifications</string>
-    <string name="pref_value_fr_hide_type_notification">lock_screen_show_notifications</string>
-    <string-array name="pref_fr_hide_type_titles">
-        <item>Whole notification</item>
-        <item>Only content</item>
-    </string-array>
-    <string-array name="pref_fr_hide_type_values">
-        <item>@string/pref_value_fr_hide_type_notification</item>
-        <item>@string/pref_value_fr_hide_type_content</item>
-    </string-array>
-
-    <string name="pref_title_fr_start_at_boot">Start at boot</string>
-    <string name="pref_key_fr_start_at_boot">frStartAtBoot</string>
-    <string name="status_connecting">Connecting...</string>
-    <string name="status_opening">Opening...</string>
-    <string name="status_active">Active...</string>
-    <string-array name="pref_fr_start_at_boot_titles">
-        <item>On</item>
-        <item>Off</item>
-    </string-array>
-    <string-array name="pref_fr_start_at_boot_values">
-        <item>true</item>
-        <item>false</item>
-    </string-array>
-
-    -->
-
-
-
 
     <string name="tv_update_key">Update</string>
     <string name="tv_update_value_ready">Ready to download!</string>
@@ -153,8 +63,8 @@
 
     <string name="button_clear_logs_text">Clear logs</string>
     <!-- Preferences -->
-    <string name="pref_is_device_rooted">isDeviceRooted</string>
-    <string name="pref_intro_root">askedForRoot</string>
+    <string name="pref_is_device_rooted" translatable="false">isDeviceRooted</string>
+    <string name="pref_intro_root" translatable="false">askedForRoot</string>
 
     <!-- content_ksp_main and ui.MainActivity -->
     <string name="tv_service_status_key">Service status: </string>
@@ -182,82 +92,82 @@
     <string name="service_desc">This keeps Face Notify in background to actively detect face and apply notification changes.</string>
 
     <!-- Hidden preferences -->
-    <string name="pref_first_boot">kspFirstBoot</string>
-    <string name="pref_new_version">kspNewVersion</string>
+    <string name="pref_first_boot" translatable="false">kspFirstBoot</string>
+    <string name="pref_new_version" translatable="false">kspNewVersion</string>
     <!-- Preferences tools xml -->
     <string name="pref_tools__header">Tools</string>
-    <string name="pref_restore_defaults__key">kspRestoreDefaults</string>
+    <string name="pref_restore_defaults__key" translatable="false">kspRestoreDefaults</string>
     <string name="pref_restore_defaults__summary">Will fix problems with notifications appearance</string>
     <string name="pref_restore_defaults__title">Restore defaults</string>
 
-    <string name="pref_fix_logcat__key">kspFixLogcat</string>
+    <string name="pref_fix_logcat__key" translatable="false">kspFixLogcat</string>
     <string name="pref_fix_logcat__summary">Click me if nothing happens when recognizing your face!</string>
     <string name="pref_fix_logcat__title">Fix logs</string>
 
-    <string name="pref_run_tester__key">kspRunTester</string>
+    <string name="pref_run_tester__key" translatable="false">kspRunTester</string>
     <string name="pref_run_tester__summary">Check if app supports your phone!</string>
     <string name="pref_run_tester__title">Run Tester</string>
 
     <!-- Preferences app logger xml -->
     <string name="pref_app_logger__header">App logger</string>
 
-    <string name="pref_log_to_file__key">kspLogToFile</string>
+    <string name="pref_log_to_file__key" translatable="false">kspLogToFile</string>
     <string name="pref_log_to_file__summary">Log app to file (FaceNotify.log)</string>
     <string name="pref_log_to_file__title">Save log to file</string>
 
-    <string name="pref_wipe_log_file__key">kspWipeLogFile</string>
+    <string name="pref_wipe_log_file__key" translatable="false">kspWipeLogFile</string>
     <string name="pref_wipe_log_file__summary">Clears log file</string>
     <string name="pref_wipe_log_file__title">Wipe log file</string>
     <!-- Preferences general xml -->
     <string name="pref_general_header">General</string>
 
-    <string name="pref_current_device__key">kspDevice</string>
+    <string name="pref_current_device__key" translatable="false">kspDevice</string>
     <string name="pref_current_device__title">Your phone</string>
     <string name="pref_current_device__summary">Unknown</string>
 
-    <string name="pref_device_supported__key">kspDeviceSupported</string>
+    <string name="pref_device_supported__key" translatable="false">kspDeviceSupported</string>
     <string name="pref_device_supported__summary">Unknown</string>
     <string name="pref_device_supported__title">Device supported</string>
     <string name="pref_device_supported__option_supported">Supported</string>
     <string name="pref_device_supported__option_not_supported">Not supported!</string>
 
-    <string name="pref_app_version__key">kspAppVersion</string>
+    <string name="pref_app_version__key" translatable="false">kspAppVersion</string>
     <string name="pref_app_version__summary">Unknown</string>
     <string name="pref_app_version__title">Version</string>
 
 
-    <string name="pref_ignore_battopt__key">kspIgnoreBattopt</string>
+    <string name="pref_ignore_battopt__key" translatable="false">kspIgnoreBattopt</string>
     <string name="pref_ignore_battopt__summary">Ignore battery optimisations for FaceNotify (won\'t get killed in the background)</string>
     <string name="pref_ignore_battopt__title">Ignore battery optimisations</string>
 
-    <string name="pref_send_feedback__key">kspSendFeedback</string>
+    <string name="pref_send_feedback__key" translatable="false">kspSendFeedback</string>
     <string name="pref_send_feedback__summary">Send me your feedback!</string>
     <string name="pref_send_feedback__title">Send feedback</string>
 
 
-    <string name="pref_ignore_fn_start__key">kspIgnoreStartTime</string>
+    <string name="pref_ignore_fn_start__key" translatable="false">kspIgnoreStartTime</string>
     <string name="pref_ignore_fn_start__summary">From which time, always show notification content</string>
     <string name="pref_ignore_fn_start__title">Always show notifications from:</string>
 
-    <string name="pref_ignore_fn_end__key">kspIgnoreEndTime</string>
+    <string name="pref_ignore_fn_end__key" translatable="false">kspIgnoreEndTime</string>
     <string name="pref_ignore_fn_end__summary">To which time, always show notification content</string>
     <string name="pref_ignore_fn_end__title">Always show notification to: </string>
 
     <!-- Preferences face recognition -->
     <string name="pref_face_recognition_header">Face recognition</string>
 
-    <string name="pref_face_recognition_settings__key">andFaceRecognitionSettings</string>
+    <string name="pref_face_recognition_settings__key" translatable="false">andFaceRecognitionSettings</string>
     <string name="pref_face_recognition_settings__title">Face recognition settings</string>
     <string name="pref_face_recognition_settings__summary">Opens a settings app</string>
 
-    <string name="pref_fr_delay_key">frDelay</string>
+    <string name="pref_fr_delay_key" translatable="false">frDelay</string>
     <string name="pref_fr_delay_title">Delay after face is recognized (ms)</string>
 
 
-    <string name="pref_fr_hide_type_key">frHideType</string>
+    <string name="pref_fr_hide_type_key" translatable="false">frHideType</string>
     <string name="pref_fr_hide_type_title">Notification hide type</string>
-    <string name="pref_fr_hide_type_value_content">lock_screen_allow_private_notifications</string>
-    <string name="pref_fr_hide_type_value_notification">lock_screen_show_notifications</string>
+    <string name="pref_fr_hide_type_value_content" translatable="false">lock_screen_allow_private_notifications</string>
+    <string name="pref_fr_hide_type_value_notification" translatable="false">lock_screen_show_notifications</string>
     <string-array name="pref_fr_hide_type_titles">
         <item>Whole notification</item>
         <item>Only content</item>
@@ -267,10 +177,10 @@
         <item>@string/pref_fr_hide_type_value_content</item>
     </string-array>
 
-    <string name="pref_fr_anim_type__key">frAnimType</string>
+    <string name="pref_fr_anim_type__key" translatable="false">frAnimType</string>
     <string name="pref_fr_anim_type__title">Notification show animation</string>
-    <string name="pref_fr_anim_type__value_fast">fast</string>
-    <string name="pref_fr_anim_type__value_flow">flow</string>
+    <string name="pref_fr_anim_type__value_fast" translatable="false">fast</string>
+    <string name="pref_fr_anim_type__value_flow" translatable="false">flow</string>
     <string-array name="pref_fr_anim_type__titles">
         <item>As-fast-as-possible</item>
         <item>Slow, but with a flow</item>
@@ -281,7 +191,7 @@
     </string-array>
 
     <string name="pref_title_fr_start_at_boot">Start at boot</string>
-    <string name="pref_key_fr_start_at_boot">frStartAtBoot</string>
+    <string name="pref_key_fr_start_at_boot" translatable="false">frStartAtBoot</string>
     <string-array name="pref_fr_start_at_boot_titles">
         <item>On</item>
         <item>Off</item>
@@ -291,7 +201,7 @@
         <item>false</item>
     </string-array>
 
-    <string name="pref_fr_detect_mode__key">kspDetectMode</string>
+    <string name="pref_fr_detect_mode__key" translatable="false">kspDetectMode</string>
     <string name="pref_fr_detect_mode__title">Detection mode</string>
     <string-array name="pref_fr_detect_mode__titles">
         <item>OnePlus (OxygenOS)</item>
