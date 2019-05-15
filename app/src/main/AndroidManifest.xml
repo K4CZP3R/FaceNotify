@@ -37,7 +37,6 @@
         <activity
             android:name=".ui.SettingsActivity"
             android:label="@string/title_activity_ksp_settings" />
-        <activity android:name="com.android.settings.Settings$SecurityDashboardActivity"/>
         <receiver android:name=".service.KspBootBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

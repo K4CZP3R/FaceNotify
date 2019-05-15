@@ -306,17 +306,30 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             addPreferencesFromResource(R.xml.pref_face_recognition);
             setHasOptionsMenu(true);
 
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
+
             bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_fr_delay_key)));
             bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_fr_hide_type_key)));
             bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_key_fr_start_at_boot)));
             bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_fr_detect_mode__key)));
             bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_fr_anim_type__key)));
 
+            Preference and_fr_settings = findPreference(getString(R.string.pref_face_recognition_settings__key));
+            and_fr_settings.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
 
+                    Intent settingsIntent = new Intent(Settings.ACTION_SECURITY_SETTINGS);
+                    if(settingsIntent.resolveActivity(FaceNotifyApp.getAppContext().getPackageManager()) != null){
+                        startActivity(settingsIntent);
+                    }
+                    else{
+                        if(getView()!=null) {
+                            Snackbar.make(getView(), "This option does not work on your phone", Snackbar.LENGTH_LONG).show();
+                        }
+                    }
+                    return true;
+                }
+            });
 
         }
 
@@ -366,6 +379,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     return true;
                 }
             });
+
+
         }
 
         @Override

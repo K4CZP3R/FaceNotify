@@ -50,12 +50,8 @@
         android:title="@string/pref_fr_detect_mode__title"
         />
 
-
-    <!-- This preference simply launches an intent when selected. Use this UI sparingly, per
-         design guidelines. -->
-    <Preference android:title="@string/pref_face_recognition_settings_title">
-        <intent android:targetPackage="com.android.settings"
-            android:targetClass="com.android.settings.Settings$SecurityDashboardActivity"/>
-    </Preference>
+    <Preference android:title="@string/pref_face_recognition_settings__title"
+        android:key="@string/pref_face_recognition_settings__key"
+        android:summary="@string/pref_face_recognition_settings__summary"/>
 
 </PreferenceScreen>
