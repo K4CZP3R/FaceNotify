@@ -42,8 +42,8 @@ public class KspConfiguration {
     }
 
     public boolean phoneModelCheck(){
-        if(getDeviceName().contains("samsung")) return true;
-        if(getDeviceName().contains("oneplus")) return true;
+        if(getDeviceName().contains("SAMSUNG")) return true;
+        if(getDeviceName().contains("ONEPLUS")) return true;
         if(isOOS()) return true;
         if(isOmni()) return true;
         if(isMIUI()) return true;
