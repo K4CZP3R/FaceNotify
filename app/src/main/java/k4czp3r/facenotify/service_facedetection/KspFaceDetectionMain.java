@@ -26,30 +26,28 @@ public class KspFaceDetectionMain {
     private KspPreferences kspPreferences = new KspPreferences();
     KspLog kspLog = new KspLog();
 
-    private static boolean repeatCheck_continueChecking = true;
-    private int repeatCheck_currentCheck = 0;
-
-    private int repeatCheck_maxChecks = 120; //will hold phone max 120*25ms
-    private static int repeatSpeed = 100;
-
     private Handler repeatCheck_handler = new Handler();
-
+    private static boolean repeatCheck_continueChecking = true;
 
     public class RepeatCheck implements Runnable {
         private String TAG_RC =RepeatCheck.class.getCanonicalName();
         int config_delayAfterFaceUnlock;
+        int repeatCheck_currentCheck = 0, repeatCheck_maxChecks=120, repeatSpeed=100;
         long startDetectDateMs;
         long startTime = System.currentTimeMillis();
         RepeatCheck(int config_delayAfterFaceUnlock, long startDetectDateMs){
             this.config_delayAfterFaceUnlock = config_delayAfterFaceUnlock;
             this.startDetectDateMs = startDetectDateMs;
+            kspLog.debug(TAG_RC, "RepeatCheck init",false);
+            kspLog.debug(TAG_RC, "Current check starts from: "+repeatCheck_currentCheck,true);
+
         }
 
 
         @Override
         public void run(){
             kspLog.info(TAG_RC, "============",false);
-            kspLog.info(TAG_RC, "Check no."+repeatCheck_currentCheck,false);
+            kspLog.info(TAG_RC, "Check no."+repeatCheck_currentCheck,true);
 
             if(kspFaceDetectionFunctions.isFaceUnlocked(this.startDetectDateMs)){
                 kspLog.info(TAG_RC, "[OK] Face recognized!",false);
@@ -59,14 +57,13 @@ public class KspFaceDetectionMain {
                 kspLog.info(TAG_RC, String.format("Will show notification in %1$sms",config_delayAfterFaceUnlock),false);
                 repeatCheck_handler.postDelayed(new FaceDetectedAction(),config_delayAfterFaceUnlock);
                 repeatCheck_continueChecking = false;
-                repeatCheck_currentCheck=0;
             }
             else{
                 kspLog.warn(TAG_RC, "Face not found!",false);
             }
 
-            repeatCheck_currentCheck+=1;
-            if(repeatCheck_currentCheck<repeatCheck_maxChecks && repeatCheck_continueChecking){
+            this.repeatCheck_currentCheck+=1;
+            if(this.repeatCheck_currentCheck<repeatCheck_maxChecks && repeatCheck_continueChecking){
                 repeatCheck_handler.postDelayed(this, repeatSpeed);
             }
             else{
