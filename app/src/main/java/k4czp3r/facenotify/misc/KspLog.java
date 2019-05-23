@@ -42,7 +42,10 @@ public class KspLog {
     public void error(String TAG, String content, boolean toLogcat){
         if(toLogcat) Log.e(TAG, content);
         appendLog(TAG, content);
-
+    }
+    public void debug(String TAG, String content, boolean toLogcat){
+        if(toLogcat) Log.d(TAG, content);
+        appendLog(TAG, content);
     }
     public void wipeLogFile(){
         if(permissionGranted()){
