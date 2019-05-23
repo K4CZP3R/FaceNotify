@@ -34,9 +34,9 @@ public class KspConfig {
         miui.put("readable","Xiaomi (MIUI)");
         miui.put("valid","201");
 
-        lg.put("detectLine_v2","faceState:");
+        lg.put("detectLine_v2","recognizing result: ");
         lg.put("readable","LG");
-        lg.put("valid","FACE_OK");
+        lg.put("valid","user_main");
 
         samsung_face.put("detectLine", "SemBioFaceServiceD: handleAuthenticated :");
         samsung_face.put("detectLine_v2","handleAuthenticated :");
