@@ -39,13 +39,13 @@ public class MainActivity extends AppCompatActivity {
 
             boolean nvtd_success = kspFaceDetectionFunctions.setNotificationVisibilityToDefault(); //Be sure everything is reverted!
             if(!nvtd_success){
-                Toast.makeText(this, "Setting secure settings failed, look at logcat/applog to see more info!",Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.maac_java_oncreate_toast_nvtdfail),Toast.LENGTH_LONG).show();
                 kspLog.error(TAG, "Setting to defaults, failed!",true);
 
             }
             else {
                 startService(new Intent(getContext(), KspAnotherService.class));
-                Toast.makeText(this, getString(R.string.btn_start_service_value_started), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.maac_java_oncreate_toast_servicestarted), Toast.LENGTH_LONG).show();
                 finish();
             }
         }
@@ -67,18 +67,18 @@ public class MainActivity extends AppCompatActivity {
                     boolean nvtd_success = kspFaceDetectionFunctions.setNotificationVisibilityToDefault(); //Be sure everything is reverted!
                     if(!nvtd_success){
                         kspLog.error(TAG, "Setting to defaults, failed!",true);
-                        Toast.makeText(context, "Setting secure settings failed, look at logcat/applog to see more info!",Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, getString(R.string.maac_java_oncreate_toast_nvtdfail),Toast.LENGTH_LONG).show();
                     }
                     else {
                         kspLog.info(TAG, "Starting service!", true);
                         startForegroundService(new Intent(view.getContext(), KspAnotherService.class));
-                        Toast.makeText(context, getString(R.string.btn_start_service_value_started), Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, getString(R.string.maac_java_oncreate_toast_servicestarted), Toast.LENGTH_LONG).show();
                     }
                     //finish();
                 }
                 else{
                     kspLog.warn(TAG, "Service is already running!",true);
-                    Toast.makeText(context, getString(R.string.btn_start_service_value_error), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, getString(R.string.maac_java_oncreate_toast_servicealreadyrunning), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -95,11 +95,11 @@ public class MainActivity extends AppCompatActivity {
                     //We will stop service even if setting to defaults failed
                     kspLog.info(TAG, "Stopping service!",true);
                     stopService(new Intent(view.getContext(), KspAnotherService.class));
-                    Toast.makeText(context, getString(R.string.btn_stop_service_value_ok), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, getString(R.string.maac_java_oncreate_toast_servicestopped), Toast.LENGTH_LONG).show();
                 }
                 else{
                     kspLog.warn(TAG, "Service is already stopped!",true);
-                    Toast.makeText(context, getString(R.string.btn_stop_service_value_error), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, getString(R.string.maac_java_oncreate_toast_servicealreadystopped), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -150,8 +150,8 @@ public class MainActivity extends AppCompatActivity {
     public void KspSetUiItems(){
         boolean serviceActive = kspFaceDetectionFunctions.isServiceRunning();
         TextView serviceStatus_value = findViewById(R.id.textView_serviceStatus_value);
-        if(serviceActive) serviceStatus_value.setText(getString(R.string.tv_service_status_value_enabled));
-        else serviceStatus_value.setText(getString(R.string.tv_service_status_value_disabled));
+        if(serviceActive) serviceStatus_value.setText(getString(R.string.maac_xml_tv_service_active));
+        else serviceStatus_value.setText(getString(R.string.maac_xml_tv_service_disabled));
     }
 
     @Override

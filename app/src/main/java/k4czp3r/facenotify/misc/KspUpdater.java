@@ -16,17 +16,16 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import k4czp3r.facenotify.FaceNotifyApp;
 import k4czp3r.facenotify.R;
 
 public class KspUpdater {
 
-    private static String kspUpdateCheckURL = "https://kspfacenotify.kacperswebsite.xyz/check";
-    private static String kspChangelogURL = "https://kspfacenotify.kacperswebsite.xyz/changelog";
-    private static String kspServerBackend = "https://kspfacenotify.kacperswebsite.xyz/b/";
+    private static String kspServerBackend = FaceNotifyApp.getAppContext().getString(R.string.ksup_java_kspupdater_serverbackendurl);
 
     private static String TAG = KspUpdater.class.getCanonicalName();
-    KspLog kspLog = new KspLog();
-    KspPreferences kspPreferences = new KspPreferences();
+    private KspLog kspLog = new KspLog();
+    private KspPreferences kspPreferences = new KspPreferences();
 
     public void KspShowChangelog(Context context) {
         boolean needToShowIt = kspPreferences.preferenceReadBoolean(context.getString(R.string.pref_new_version));
@@ -42,7 +41,7 @@ public class KspUpdater {
                 try {
                     String changelog = response.getString("changelog");
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setTitle("Changelog");
+                    builder.setTitle(context.getString(R.string.ksup_java_kspshowchangelogonresponse_dialog_title));
                     builder.setMessage(Html.fromHtml(changelog,0));
                     builder.show();
                     kspPreferences.preferenceSaveBoolean(context.getString(R.string.pref_new_version),false);
@@ -81,8 +80,8 @@ public class KspUpdater {
                     if(!appVersion.equals(serverVersion)){
                         kspLog.info(TAG, "Update required!",true);
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                        builder.setTitle("Update ready!");
-                        builder.setMessage("There is a new update. Go to Google Play and download it! ("+serverVersion+")");
+                        builder.setTitle(context.getString(R.string.ksup_java_kspappupdatecheck_dialog_title));
+                        builder.setMessage(String.format(context.getString(R.string.ksup_java_kspappupdatecheck_dialog_content),serverVersion));
                         builder.show();
                     }
                     else{

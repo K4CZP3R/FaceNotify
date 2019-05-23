@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Face Notify</string>
     <string name="action_settings">Ustawienia</string>
     <string name="btn_adb_permissions_grant">Przyznaj</string>
     <string name="btn_adb_permissions_granted">Przyznane!</string>
@@ -10,15 +9,9 @@
     <string name="btn_startService">Uruchom usługę</string>
     <string name="btn_startService_onClick_toast_already">Usługa jest już uruchomiona!</string>
     <string name="btn_startService_onClick_toast_started">Usługa jest aktywna! Przetestuj ją!</string>
-    <string name="btn_start_service_key">Uruchom usługę</string>
-    <string name="btn_start_service_value_error">Usługa jest just aktywa!</string>
-    <string name="btn_start_service_value_started">Usługa jest aktywna! Przetestuj ją!</string>
     <string name="btn_stopService">Zatrzymaj usługę</string>
     <string name="btn_stopService_onClick_toast_already">Usługa jest już zatrzymana!</string>
     <string name="btn_stopService_onClick_toast_stopped">Usługa zatrzymana!</string>
-    <string name="btn_stop_service_key">Zatrzymaj usługę</string>
-    <string name="btn_stop_service_value_error">Usługa nie jest aktywna!</string>
-    <string name="btn_stop_service_value_ok">Usługa zatrzymana, przywracanie domyślnych ustawień!</string>
     <string name="button_clear_logs_text">Wyczyść logi</string>
     <string name="notification_boot_text">Naciśnij tę notifikację aby uruchomić usługę!</string>
     <string name="notification_boot_title">FaceNotify - gotowy do startu</string>
@@ -66,6 +59,8 @@
     <string name="title_activity_ksp_main">Face Notify</string>
     <string name="title_activity_ksp_settings">Ustawienia</string>
     <string name="tv_adb_permission_info">"Następujące uprawnienia są wymagane.\n\n\n        READ_LOGS: Bez tego, wykrywanie twarzy nie jest możliwe.\n\n        WRITE_SECURE_SETTINGS: Chowanie/Pokazywanie powiadomień.\n\n        DUMP: Sprawdzanie statusu usługi.\n\n        PACKAGE_USAGE_STATS: to samo co wyżej.\n    "</string>
+    <string name="tv_reboot_info">Jeśli to pierwsze uruchomienie, to restart urządzenia jest wymagany.</string>
+    <string name="btn_reboot">Uruchom ponownie</string>
     <string name="tv_how_to">Zablokuj i odblokuj telefon używając swojej twarzy!\nWartości powinny się zmienić,\njeśli jakaś wartość zmieni kolor na zielony, użyj jej w ustawieniach!\n</string>
     <string name="tv_intro_text">"Dziękuje za pobranie FaceNotify!\n\n        Aby używać FaceNotify wymagane jest trochę uprawnień!\n    "</string>
     <string name="tv_log_permission_info">"Następne uprawnienia są opcjonalne.\n\n\n        WRITE_EXTERNAL_STORAGE: Zapis logu do pliku.\n    "</string>
@@ -77,14 +72,34 @@
     <string name="tv_serviceStatus_value_off">Nieaktywna</string>
     <string name="tv_serviceStatus_value_on">Aktywna</string>
     <string name="tv_serviceStatus_value_unk">Nieznany</string>
-    <string name="tv_service_status_key">Status usługi:</string>
-    <string name="tv_service_status_value_disabled">Nieaktywna</string>
-    <string name="tv_service_status_value_enabled">Aktywna</string>
-    <string name="tv_service_status_value_unknown">Nieznany</string>
     <string name="tv_update_key">Aktualizacja</string>
     <string name="tv_update_value_ready">Gotowa do pobrania</string>
     <string name="tv_workingMode_key">Działająca metoda:</string>
     <string name="tv_workingMode_value_noroot">Bez root</string>
     <string name="tv_workingMode_value_root">root</string>
     <string name="tv_workingMode_value_unk">nieznana</string>
+    <string name="ksup_java_kspappupdatecheck_dialog_content">Nowa aktualizacja jest dostępna w sklepie Google Play! (%s)</string>
+    <string name="ksup_java_kspappupdatecheck_dialog_title">Aktualizacja gotowa do pobrania!</string>
+    <string name="ksup_java_kspshowchangelogonresponse_dialog_title">Changelog</string>
+    <string name="maac_java_oncreate_toast_nvtdfail">Zmiania ustawień nie powiodła się, zobacz logcat/logi aplikacji!</string>
+    <string name="maac_java_oncreate_toast_servicealreadyrunning">Usługa jest już uruchomiona!</string>
+    <string name="maac_java_oncreate_toast_servicealreadystopped">Usługa jest już zatrzymana!</string>
+    <string name="maac_java_oncreate_toast_servicestarted">Usługa jest aktywna! Przetestuj ją!</string>
+    <string name="maac_java_oncreate_toast_servicestopped">Usługa zatrzymana!</string>
+    <string name="maac_xml_btb_value_alreadystopped">\@string/maac_java_oncreate_toast_servicealreadystopped</string>
+    <string name="maac_xml_btn_startservice">Uruchom usługę</string>
+    <string name="maac_xml_btn_stopservice">Zatrzymaj usługę</string>
+    <string name="maac_xml_tv_service_active">Aktywny</string>
+    <string name="maac_xml_tv_service_disabled">Nie aktywny</string>
+    <string name="maac_xml_tv_service_status">Status usługi</string>
+    <string name="maac_xml_tv_service_unknown">Nieznany</string>
+    <string name="stac_java_grantadbpermissionsrootquestion_dialog_content">Czy twoje urządzenie posiada Root? To ułatwi konfigurację. Jeśli nie, będziesz potrzebował komputera i facenotify helper (jednorazowo)</string>
+    <string name="stac_java_grantadbpermissionsrootquestion_dialog_title">Uprawnienia root (opcjonalne)</string>
+    <string name="stac_java_ignorerootpermissionsonclick_dialog_title">Wprowadź następujące komendy w adb</string>
+    <string name="stac_java_rebootquestion_dialog_content">Manualnie uruchom telefon ponownie, chyba że masz root, to kliknij ok</string>
+    <string name="stac_java_rebootquestion_dialog_title">Uruchom ponownie</string>
+    <string name="univ___done">Gotowe</string>
+    <string name="univ___no">Nie</string>
+    <string name="univ___ok">Ok</string>
+    <string name="univ___yes">Tak</string>
 </resources>

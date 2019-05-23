@@ -1,6 +1,17 @@
 <resources>
+    <!-- AAAA_B_C_D(_D)
+    AAAA: St(artup)Ac(tivity)
+    B: java/xml
+    C: java=function name (without _), xml=item name
+    D: custom type -->
+
     <string name="app_name" translatable="false">Face Notify</string>
 
+    <!-- universal strings -->
+    <string name="univ___yes">Yes</string>
+    <string name="univ___no">No</string>
+    <string name="univ___ok">Ok</string>
+    <string name="univ___done">Done</string>
 
     <!-- activity_startup.xml -->
     <string name="tv_intro_text">Thanks for downloading FaceNotify!\n
@@ -20,14 +31,24 @@
     </string>
     <string name="btn_log_permissions_grant">Grant</string>
 
+    <string name="tv_reboot_info">Is it your first install? Then you should reboot your phone.</string>
+    <string name="btn_reboot">Reboot</string>
+
     <string name="btn_continue">Continue</string>
     <string name="btn_ignore_battopt">Ignore battery optimisations</string>
-    <!--
-    <string name="tv_permissionRL_key">Permission READ_LOGS: </string>
-    <string name="tv_permissionWS_key">Permission WRITE_SECURE_SETTINGS: </string>
-    <string name="tv_permissionD_key">Permission DUMP: </string>
-    <string name="tv_permissionPUS_key">Permission PACKAGE_USAGE_STATS: </string>-->
 
+    <string name="stac_java_rebootquestion_dialog_title">Reboot your phone</string>
+    <string name="stac_java_rebootquestion_dialog_content">Manually reboot your phone now, or if you have root, just click ok</string>
+
+    <string name="stac_java_grantadbpermissionsrootquestion_dialog_title">Root rights (optional)</string>
+    <string name="stac_java_grantadbpermissionsrootquestion_dialog_content">Is your device rooted? It will make things easier. If not you will need PC with FaceNotify helper (one time only)</string>
+
+    <string name="stac_java_ignorerootpermissionsonclick_dialog_title">Enter following commands via adb</string>
+    <string name="stac_java_ignorerootpermissionsonclick_dialog_content" translatable="false">You need to enter following commands in adb:&lt;br&gt;&lt;br&gt;1. &lt;font color="red"&gt;adb shell pm grant k4czp3r.facenotify android.permission.READ_LOGS&lt;/font&gt;&lt;br&gt;&lt;br&gt;2. &lt;font color="red"&gt;adb shell pm grant k4czp3r.facenotify android.permission.WRITE_SECURE_SETTINGS&lt;/font&gt;&lt;br&gt;&lt;br&gt;3. &lt;font color="red"&gt;adb shell pm grant k4czp3r.facenotify android.permission.DUMP&lt;br&gt;&lt;br&gt;4. &lt;font color="red"&gt;adb shell pm grant k4czp3r.facenotify android.permission.PACKAGE_USAGE_STATS</string>
+
+
+
+    <!-- end of activity_startup -->
     <string name="service_channel_name">FaceNotify - Service</string>
     <string name="service_channel_description">This keeps Face Notify in background to actively detect face and apply notification changes.</string>
 
@@ -65,18 +86,36 @@
     <!-- Preferences -->
     <string name="pref_is_device_rooted" translatable="false">isDeviceRooted</string>
     <string name="pref_intro_root" translatable="false">askedForRoot</string>
+    <!-- kspUpdater -->
+    <string name="ksup_java_kspupdater_serverbackendurl" translatable="false">https://kspfacenotify.kacperswebsite.xyz/b/</string>
+    <string name="ksup_java_kspshowchangelogonresponse_dialog_title">Changelog</string>
+    <string name="ksup_java_kspappupdatecheck_dialog_title">Update is ready to download!</string>
+    <string name="ksup_java_kspappupdatecheck_dialog_content">There is a new update. Go to Google Play and download it! (%s)</string>
 
     <!-- content_ksp_main and ui.MainActivity -->
-    <string name="tv_service_status_key">Service status: </string>
-    <string name="tv_service_status_value_enabled">Active</string>
-    <string name="tv_service_status_value_disabled">Disabled</string>
-    <string name="tv_service_status_value_unknown">Unknown</string>
-    <string name="btn_stop_service_key">Stop service</string>
-    <string name="btn_start_service_key">Start service</string>
-    <string name="btn_start_service_value_error">Service is already running!</string>
-    <string name="btn_start_service_value_started">Service started! Go check it out!</string>
-    <string name="btn_stop_service_value_ok">Service stopped! Reverting settings!</string>
-    <string name="btn_stop_service_value_error">Service is already off!</string>
+    <!-- AAAA_B_C_D(_D)
+    AAAA: St(artup)Ac(tivity)
+    B: java/xml
+    C: java=function name (without _), xml=item name
+    D: custom type -->
+
+    <string name="maac_java_oncreate_toast_nvtdfail">Setting secure settings filed, look at logcat/applog for more info!</string>
+    <string name="maac_java_oncreate_toast_servicestarted">Service started! Go check it out!</string>
+    <string name="maac_java_oncreate_toast_servicealreadyrunning">Service is already running!</string>
+    <string name="maac_java_oncreate_toast_servicestopped">Service stopped! Reverting settings!</string>
+    <string name="maac_java_oncreate_toast_servicealreadystopped">Service is already off!</string>
+
+    <string name="maac_xml_tv_service_status">Service status: </string>
+    <string name="maac_xml_tv_service_active">Active</string>
+    <string name="maac_xml_tv_service_disabled">Disabled</string>
+    <string name="maac_xml_tv_service_unknown">Unknown</string>
+    <string name="maac_xml_btn_stopservice">Stop service</string>
+    <string name="maac_xml_btn_startservice">Start service</string>
+
+    <string name="maac_xml_btn_value_alreadyrunning" translatable="false">@string/maac_java_oncreate_toast_servicealreadyrunning</string>
+    <string name="maac_xml_btn_value_started" translatable="false">@string/maac_java_oncreate_toast_servicestarted</string>
+    <string name="maac_xml_btn_value_stopped" translatable="false">@string/maac_java_oncreate_toast_servicestopped</string>
+    <string name="maac_xml_btb_value_alreadystopped">@string/maac_java_oncreate_toast_servicealreadystopped</string>
 
     <!-- activity_comp_check and ui.CompCheck -->
     <string name="tv_option1_key">Custom ROM (crDroid, OmniROM)</string>
@@ -210,6 +249,7 @@
         <item>Samsung (Face scan)</item>
         <item>Samsung (Iris scan)</item>
         <item>Samsung (Intelligent scan)</item>
+        <item>LG</item>
     </string-array>
     <string-array name="pref_fr_detect_mode__values">
         <item>oneplus</item>
@@ -218,7 +258,12 @@
         <item>samsung_face</item>
         <item>samsung_iris</item>
         <item>samsung_intelligent</item>
+        <item>lg</item>
 
     </string-array>
+
+
+
+
 
 </resources>

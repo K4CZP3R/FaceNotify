@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
-        android:text="@string/btn_start_service_key"
+        android:text="@string/maac_xml_btn_startservice"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
-        android:text="@string/btn_stop_service_key"
+        android:text="@string/maac_xml_btn_stopservice"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button_startService" />
 
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/tv_service_status_key"
+        android:text="@string/maac_xml_tv_service_status"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="@string/tv_service_status_value_unknown"
+        android:text="@string/maac_xml_tv_service_unknown"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView_serviceStatus_key"
         app:layout_constraintEnd_toEndOf="parent" />
 
