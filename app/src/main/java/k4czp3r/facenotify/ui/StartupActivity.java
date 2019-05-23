@@ -49,6 +49,7 @@ public class StartupActivity extends AppCompatActivity {
         Button button_adbGrant = findViewById(R.id.button_adb_permissions_grant);
         Button button_logGrant = findViewById(R.id.button_log_permissions_grant);
         Button button_ignore_battopt = findViewById(R.id.button_ignore_battopt);
+        Button button_reboot = findViewById(R.id.button_reboot);
 
         //Check ADB permissions
         TextView tv_adb_permission_status = findViewById(R.id.textView_adb_permission_status);
@@ -104,6 +105,13 @@ public class StartupActivity extends AppCompatActivity {
                 pmAskForPermission(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},0);
             }
         });
+        //reboot
+        button_reboot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reboot_question();
+            }
+        });
 
         //continue
         button_continue.setOnClickListener(new View.OnClickListener() {
@@ -117,15 +125,35 @@ public class StartupActivity extends AppCompatActivity {
             goToMainActivity();
         }
     }
+    // <editor-fold defaultstate="collapsed" desc="Reboot dialog">
+    private void reboot_question(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setTitle(getString(R.string.stac_java_rebootquestion_dialog_title));
+        builder.setMessage(getString(R.string.stac_java_rebootquestion_dialog_content));
+        builder.setPositiveButton(getString(R.string.univ___ok), new StartupActivity.RequestReboot());
+        builder.show();
+    }
 
+    class RequestReboot implements DialogInterface.OnClickListener {
+        RequestReboot(){}
+
+        @Override
+        public void onClick(DialogInterface dialog, int which){
+            kspLog.debug(TAG, "Rebooting phone.",true);
+            kspPreferences.setFirstRun("false");
+            Shell.su("reboot").exec();
+        }
+    }
+    // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Grant ADB permissions dialogs">
     private void grantAdbPermissions_rootQuestion(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
-        builder.setTitle("Root rights (optional)");
-        builder.setMessage("Is your device rooted? It will make things easier. If not you will need PC with adb (one time only)");
-        builder.setPositiveButton("Yes", new StartupActivity.RequestRootPermissions());
-        builder.setNegativeButton("No", new StartupActivity.IgnoreRootPermissions());
+        builder.setTitle(getString(R.string.stac_java_grantadbpermissionsrootquestion_dialog_title));
+        builder.setMessage(getString(R.string.stac_java_grantadbpermissionsrootquestion_dialog_content));
+        builder.setPositiveButton(getString(R.string.univ___yes), new StartupActivity.RequestRootPermissions());
+        builder.setNegativeButton(getString(R.string.univ___no), new StartupActivity.IgnoreRootPermissions());
         builder.show();
     }
     class RequestRootPermissions implements DialogInterface.OnClickListener {
@@ -150,10 +178,9 @@ public class StartupActivity extends AppCompatActivity {
         public void onClick(DialogInterface dialog, int which){
             AlertDialog.Builder builder = new AlertDialog.Builder(StartupActivity.this);
             builder.setCancelable(false);
-            builder.setTitle("Enter following commands via adb");
-            String howto = "You need to enter following commands in adb:<br><br>1. <font color=\"red\">adb shell pm grant k4czp3r.facenotify android.permission.READ_LOGS</font><br><br>2. <font color=\"red\">adb shell pm grant k4czp3r.facenotify android.permission.WRITE_SECURE_SETTINGS</font><br><br>3. <font color=\"red\">adb shell pm grant k4czp3r.facenotify android.permission.DUMP<br><br>4. <font color=\"red\">adb shell pm grant k4czp3r.facenotify android.permission.PACKAGE_USAGE_STATS";
-            builder.setMessage(Html.fromHtml(howto));
-            builder.setPositiveButton("Done!",new StartupActivity.RestartAppToTest());
+            builder.setTitle(getString(R.string.stac_java_ignorerootpermissionsonclick_dialog_title));
+            builder.setMessage(Html.fromHtml(getString(R.string.stac_java_ignorerootpermissionsonclick_dialog_content)));
+            builder.setPositiveButton(getString(R.string.univ___done),new StartupActivity.RestartAppToTest());
             builder.show();
         }
     }
