@@ -7,6 +7,7 @@ public class KspConfig {
     private static final Map<String, String> oneplus = new HashMap<String, String>();
     private static final Map<String, String> smartlock = new HashMap<String, String>();
     private static final Map<String, String> miui = new HashMap<String, String>();
+    private static final Map<String, String> lg = new HashMap<>();
 
     private static final Map<String, String> samsung_intelligent = new HashMap<>();
     private static final Map<String, String> samsung_iris = new HashMap<>();
@@ -33,7 +34,9 @@ public class KspConfig {
         miui.put("readable","Xiaomi (MIUI)");
         miui.put("valid","201");
 
-
+        lg.put("detectLine_v2","faceState:");
+        lg.put("readable","LG");
+        lg.put("valid","FACE_OK");
 
         samsung_face.put("detectLine", "SemBioFaceServiceD: handleAuthenticated :");
         samsung_face.put("detectLine_v2","handleAuthenticated :");
@@ -54,6 +57,7 @@ public class KspConfig {
         phones.put("oneplus", oneplus);
         phones.put("smartlock", smartlock);
         phones.put("miui", miui);
+        phones.put("lg",lg);
 
         phones.put("samsung_face",samsung_face);
         phones.put("samsung_iris",samsung_iris);
@@ -71,9 +75,7 @@ public class KspConfig {
         return phones;
     }
     public Map<String, String> getPhoneNames(){return phones_name;}
-    public String DM_miui(){
-        return "miui";
-    }
+    public String DM_miui(){ return "miui"; }
     public String DM_smartlock(){
         return "smartlock";
     }
@@ -90,4 +92,5 @@ public class KspConfig {
     public String DM_samsung_intelligent(){
         return "samsung_intelligent";
     }
+    public String DM_lg(){ return "lg";}
 }

@@ -71,7 +71,13 @@ public class KspPreferences {
     }
     public boolean detectionModeValid(){
         String detectMode = preferenceReadString( FaceNotifyApp.getAppContext().getString(R.string.pref_fr_detect_mode__key));
-        return detectMode.equals(kspConfig.DM_miui()) || detectMode.equals(kspConfig.DM_oneplus()) || detectMode.equals(kspConfig.DM_smartlock()) || detectMode.equals(kspConfig.DM_samsung_face()) || detectMode.equals(kspConfig.DM_samsung_intelligent()) || detectMode.equals(kspConfig.DM_samsung_iris());
+        return detectMode.equals(kspConfig.DM_miui()) ||
+                detectMode.equals(kspConfig.DM_oneplus()) ||
+                detectMode.equals(kspConfig.DM_smartlock()) ||
+                detectMode.equals(kspConfig.DM_samsung_face()) ||
+                detectMode.equals(kspConfig.DM_samsung_intelligent()) ||
+                detectMode.equals(kspConfig.DM_samsung_iris()) ||
+                detectMode.equals(kspConfig.DM_lg());
     }
     public void setDetectionMode(String detectionMode){
         preferenceSaveString( FaceNotifyApp.getAppContext().getString(R.string.pref_fr_detect_mode__key), detectionMode);

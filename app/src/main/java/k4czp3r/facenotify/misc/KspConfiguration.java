@@ -44,6 +44,7 @@ public class KspConfiguration {
     public boolean phoneModelCheck(){
         if(getDeviceName().contains("SAMSUNG")) return true;
         if(getDeviceName().contains("ONEPLUS")) return true;
+        if(getDeviceName().contains("LG")) return true;
         if(isOOS()) return true;
         if(isOmni()) return true;
         if(isMIUI()) return true;
@@ -102,6 +103,7 @@ public class KspConfiguration {
         else if(getDeviceName().contains("ONEPLUS")) detectionMode = kspConfig.DM_oneplus();
         else if(getDeviceName().contains("XIAOMI")) detectionMode = kspConfig.DM_miui();
         else if(getDeviceName().contains("SAMSUNG")) detectionMode = kspConfig.DM_samsung_face();
+        else if(getDeviceName().contains("LG")) detectionMode = kspConfig.DM_lg();
         else detectionMode = kspConfig.DM_smartlock();
 
         kspPreferences.setDetectionMode(detectionMode);
