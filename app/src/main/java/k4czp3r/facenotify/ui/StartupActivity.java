@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import com.topjohnwu.superuser.Shell;
 
+import java.io.File;
+
 import k4czp3r.facenotify.FaceNotifyApp;
 import k4czp3r.facenotify.R;
 import k4czp3r.facenotify.misc.KspConfiguration;
@@ -32,6 +34,9 @@ public class StartupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startup);
+
+        kspLog.info(TAG,"\n===\nFaceNotify: 1.5.2\n===\n/bin/sh: "+new File("/bin/sh").exists()+"\n/system/bin/sh: "+new File("/system/bin/sh").exists(),true);
+
         boolean skipToMain = true;
         kspLog.info(TAG, "first run: "+kspPreferences.firstRun(),true);
 

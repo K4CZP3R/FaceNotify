@@ -3,6 +3,7 @@ package k4czp3r.facenotify.service_facedetection;
 import android.util.Log;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -23,18 +24,17 @@ public class KspFaceDetectionLogcat {
     private KspLog kspLog = new KspLog();
     private KspPreferences kspPreferences = new KspPreferences();
 
-    public void clearLogs(){
-       try {
-           Process process = new ProcessBuilder().command("/bin/sh -c logcat -c").redirectErrorStream(true).start();
-       }
-       catch (Exception ex){
-           kspLog.error(TAG, ex.getMessage(),true);
-           ex.printStackTrace();
-       }
+    public void clearLogs() {
+        try {
+            Runtime.getRuntime().exec(new String[]{"/system/bin/sh", "-c", "logcat -c"});
+        } catch (Exception ex) {
+            kspLog.error(TAG, ex.getMessage(), true);
+            ex.printStackTrace();
+        }
     }
     public boolean foundInLogs(String includeString){
 
-        String[] logcatCommand = new String[]{"/bin/sh","-c","logcat -d -T 2048 -e \""+includeString+"\""};
+        String[] logcatCommand = new String[]{"/system/bin/sh","-c","logcat -d -T 2048 -e \""+includeString+"\""};
         try {
             Process processLogcat = Runtime.getRuntime().exec(logcatCommand);
             BufferedReader readerLogcat = new BufferedReader(new InputStreamReader(processLogcat.getInputStream()));
@@ -57,7 +57,7 @@ public class KspFaceDetectionLogcat {
 
     public List<String> readLogs(String includeStringLogcat, String filterTag, long detectStartTimeMs){
         kspLog.info(TAG, "Searching for: '"+includeStringLogcat+"'",false);
-        String[] logcatCommand = new String[]{"/bin/sh","-c","logcat -d -e \""+includeStringLogcat+"\""};
+        String[] logcatCommand = new String[]{"/system/bin/sh","-c","logcat -d -e \""+includeStringLogcat+"\""};
 
 
         //TODO: Implement filterTag when it will be needed
