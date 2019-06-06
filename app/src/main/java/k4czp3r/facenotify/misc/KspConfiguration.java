@@ -1,26 +1,11 @@
 package k4czp3r.facenotify.misc;
 
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.util.Log;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import k4czp3r.facenotify.FaceNotifyApp;
-import k4czp3r.facenotify.KspAppConfiguration;
-import k4czp3r.facenotify.R;
 
 public class KspConfiguration {
     private static String TAG = KspConfiguration.class.getCanonicalName();

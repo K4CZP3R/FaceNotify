@@ -1,12 +1,7 @@
 package k4czp3r.facenotify.service_facedetection;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.content.Context;
 import android.os.Handler;
-import android.support.v4.app.NotificationCompat;
-import android.util.Log;
-import android.widget.Toast;
+import androidx.core.app.NotificationCompat;
 
 import java.time.LocalDate;
 import java.time.ZoneId;

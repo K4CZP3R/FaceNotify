@@ -10,6 +10,8 @@ import com.topjohnwu.superuser.Shell;
 import androidx.annotation.NonNull;
 
 public class FaceNotifyApp extends ContainerApp {
+    //ADBMOBID: ca-app-pub-2847518732058964~3723283789
+    //banner: ca-app-pub-2847518732058964/5093750363
     public static final String TAG = FaceNotifyApp.class.getCanonicalName();
 
     private static Application application;

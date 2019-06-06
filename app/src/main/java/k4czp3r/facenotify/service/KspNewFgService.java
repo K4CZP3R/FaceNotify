@@ -5,7 +5,6 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.IntentFilter;
 
@@ -13,12 +12,10 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
-import android.os.Process;
-import android.support.v4.app.NotificationCompat;
-import android.util.Log;
+
+import androidx.core.app.NotificationCompat;
 
 
-import androidx.annotation.Keep;
 import androidx.annotation.Nullable;
 import k4czp3r.facenotify.R;
 import k4czp3r.facenotify.misc.KspLog;

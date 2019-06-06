@@ -3,14 +3,14 @@ package k4czp3r.facenotify.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 
 import k4czp3r.facenotify.R;
 import k4czp3r.facenotify.misc.KspLog;
@@ -20,8 +20,14 @@ import k4czp3r.facenotify.service_facedetection.KspFaceDetectionFunctions;
 
 import static com.topjohnwu.superuser.internal.InternalUtils.getContext;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 public class MainActivity extends AppCompatActivity {
     private static String TAG = MainActivity.class.getCanonicalName();
+
+    private AdView mAdView;
 
     KspFaceDetectionFunctions kspFaceDetectionFunctions = new KspFaceDetectionFunctions();
     KspUpdater kspUpdater = new KspUpdater();
@@ -31,6 +37,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        //adshit
+        MobileAds.initialize(this, "ca-app-pub-2847518732058964~3723283789");
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("596EA5A12C89B76B0AE25CE89B929C28").build();
+        mAdView.loadAd(adRequest);
+
 
         Intent intent = getIntent();
         boolean bootserviceStart = intent.getBooleanExtra("startService",false);

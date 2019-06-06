@@ -1,21 +1,14 @@
 package k4czp3r.facenotify.service;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.support.v4.app.JobIntentService;
-import android.support.v4.app.NotificationCompat;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.JobIntentService;
+import androidx.core.app.NotificationCompat;
 
 import k4czp3r.facenotify.FaceNotifyApp;
-import k4czp3r.facenotify.R;
 import k4czp3r.facenotify.misc.KspLog;
-import k4czp3r.facenotify.ui.MainActivity;
 
 public class KspBootService extends JobIntentService {
     public static final int JOB_ID = 0x01;

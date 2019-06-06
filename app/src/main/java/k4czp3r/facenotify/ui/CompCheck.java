@@ -1,14 +1,9 @@
 package k4czp3r.facenotify.ui;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import k4czp3r.facenotify.R;
 import k4czp3r.facenotify.misc.KspConfig;

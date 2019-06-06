@@ -12,8 +12,8 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
-import android.renderscript.RenderScript;
-import android.support.v4.app.NotificationCompat;
+
+import androidx.core.app.NotificationCompat;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
