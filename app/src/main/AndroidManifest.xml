@@ -19,6 +19,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-2847518732058964~3723283789"/>
+
         <activity android:name=".ui.LogViewer" />
         <activity android:name=".ui.CompCheck" />
 
