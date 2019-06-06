@@ -166,7 +166,7 @@
 
     <string name="pref_device_supported__key" translatable="false">kspDeviceSupported</string>
     <string name="pref_device_supported__summary">Unknown</string>
-    <string name="pref_device_supported__title">Device supported</string>
+    <string name="pref_device_supported__title">Device status</string>
     <string name="pref_device_supported__option_supported">Supported</string>
     <string name="pref_device_supported__option_not_supported">Not supported!</string>
 
