@@ -3,16 +3,16 @@ apply plugin: 'com.android.application'
 
 ext.versionMajor = 1
 ext.versionMinor = 5
-ext.versionPatch = 3
+ext.versionPatch = 5
 android {
-    compileSdkVersion 27
+    compileSdkVersion 29
     defaultConfig {
         applicationId "k4czp3r.facenotify"
         minSdkVersion 27
-        targetSdkVersion 27
+        targetSdkVersion 29
         versionCode generateVersionCode()
         versionName generateVersionName()
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release_alpha {
@@ -71,12 +71,14 @@ private String generateVersionName() {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation 'com.google.android.gms:play-services-ads:17.2.1' //adshit
 }
 
 dependencies {
@@ -94,37 +96,18 @@ repositories {
 dependencies {
     def libsuVersion = '2.2.0'
     implementation "com.github.topjohnwu.libsu:core:${libsuVersion}"
-
-    /* Optional: For using com.topjohnwu.superuser.io classes */
     implementation "com.github.topjohnwu.libsu:io:${libsuVersion}"
-
-    /* Optional: For including a prebuild busybox */
     implementation "com.github.topjohnwu.libsu:busybox:${libsuVersion}"
 }
 
 dependencies {
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 }
 
-dependencies {
-    implementation 'com.android.support:support-v4:27.+'
-}
 
 dependencies {
-    implementation 'com.android.support:support-v4:27.+'
-}
-
-dependencies {
-    implementation 'com.android.support:support-v4:27.+'
-}
-
-dependencies {
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.android.support:design:27.+'
-}
-
-dependencies {
-    implementation 'com.android.support:support-v4:27.+'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.google.android.material:material:1.0.0'
 }
 
 dependencies {
@@ -132,14 +115,10 @@ dependencies {
 }
 dependencies {
     implementation 'com.tananaev:adblib:1.2'
-    implementation 'commons-codec:commons-codec:1.9'
+    implementation 'commons-codec:commons-codec:1.10'
 }
 
 dependencies {
-    implementation 'com.github.AppIntro:AppIntro:4.2.3'
-}
-
-dependencies {
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 }
 
