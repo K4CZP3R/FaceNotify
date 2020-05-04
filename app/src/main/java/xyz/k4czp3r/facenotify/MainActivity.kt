@@ -1,10 +1,9 @@
 package xyz.k4czp3r.facenotify
 
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -16,11 +15,10 @@ import xyz.k4czp3r.facenotify.user_interface.FragmentSettings
 import xyz.k4czp3r.facenotify.user_interface.FragmentSummary
 
 class MainActivity : AppCompatActivity() {
-    private val TAG = MainActivity::class.qualifiedName
 
-    lateinit var fragmentPagerAdapter: FragmentPagerAdapter
-    lateinit var viewPager: ViewPager
-    lateinit var tabLayout: TabLayout
+    private lateinit var fragmentPagerAdapter: FragmentPagerAdapter
+    private lateinit var viewPager: ViewPager
+    private lateinit var tabLayout: TabLayout
 
     private val summaryPage = Page(
         "Summary",
@@ -61,14 +59,14 @@ class MainActivity : AppCompatActivity() {
 
     class KspPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(
         fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-        private val TAG = KspPagerAdapter::class.qualifiedName
+        private val tagName = KspPagerAdapter::class.qualifiedName
 
         override fun getCount(): Int {
             return 3
         }
 
         override fun getItem(position: Int): Fragment {
-            Log.v(TAG, String.format("Getting item no.%s",position))
+            Log.v(tagName, String.format("Getting item no.%s",position))
             return when (position) {
                 0 -> FragmentSummary.newInstance()
                 1 -> FragmentSettings.newInstance()
@@ -79,7 +77,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         override fun getPageTitle(position: Int): CharSequence? {
-            Log.v(TAG, String.format("Getting page title of no.%s", position))
+            Log.v(tagName, String.format("Getting page title of no.%s", position))
             return position.toString()
         }
     }

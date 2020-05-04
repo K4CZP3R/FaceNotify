@@ -1,7 +1,5 @@
 package xyz.k4czp3r.facenotify.models
 
-import androidx.fragment.app.Fragment
-
 class Page(
     private val name: String,
     private val icon: Int,

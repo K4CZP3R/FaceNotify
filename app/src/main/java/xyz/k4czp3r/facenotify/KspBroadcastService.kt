@@ -9,16 +9,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Color
-import android.net.ConnectivityManager
-import android.os.Binder
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import java.lang.Exception
-import java.lang.UnsupportedOperationException
 
 class KspBroadcastService : Service() {
-    private val TAG = KspBroadcastService::class.qualifiedName
+    private val tagName = KspBroadcastService::class.qualifiedName
 
     companion object {
         private val LAUNCHER = FgServiceLauncher(KspBroadcastService::class.java)
@@ -37,12 +33,12 @@ class KspBroadcastService : Service() {
     private val br: BroadcastReceiver = KspBroadcastReceiver()
 
     override fun onDestroy() {
-        Log.v(TAG, "onDestroy, unregister receiver!")
+        Log.v(tagName, "onDestroy, unregister receiver!")
         try{
             unregisterReceiver(br)
         }
         catch(e: Exception){
-            Log.w(TAG, "Tried to unregister receiver, failed!")
+            Log.w(tagName, "Tried to unregister receiver, failed!")
             e.printStackTrace()
         }
     }
@@ -81,14 +77,14 @@ class KspBroadcastService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.i(TAG, "Registering broadcast receiver!")
+        Log.i(tagName, "Registering broadcast receiver!")
         val filter = IntentFilter().apply {
             addAction(Intent.ACTION_SCREEN_ON)
             addAction(Intent.ACTION_SCREEN_OFF)
             addAction(Intent.ACTION_USER_PRESENT)
         }
         registerReceiver(br, filter)
-        return super.onStartCommand(intent, flags, startId);
+        return super.onStartCommand(intent, flags, startId)
     }
 
 }

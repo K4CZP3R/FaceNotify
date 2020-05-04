@@ -21,15 +21,7 @@
                 android:layout_height="match_parent"
                 android:paddingBottom="64dp">
 
-                <TextView
-                    android:id="@+id/f_summary_textView_currentMode_key"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:text="@string/current_mode_key"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+
 
                 <Switch
                     android:id="@+id/f_summary_switchService"
@@ -39,17 +31,7 @@
                     android:layout_marginTop="24dp"
                     android:text="@string/service_switch_unknown"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/f_summary_textView_currentMode_key" />
-
-                <TextView
-                    android:id="@+id/f_summary_textView_currentMode_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:text="@string/current_mode_value"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"  />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

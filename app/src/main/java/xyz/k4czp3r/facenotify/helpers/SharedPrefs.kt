@@ -5,22 +5,12 @@ import android.content.SharedPreferences
 import xyz.k4czp3r.facenotify.FaceNotify
 
 enum class PrefsKeys {
-    SELECTED_MODE, START_AT_BOOT, PERMISSIONS_GRANTED, SELECTED_NOTIFICATION_MODE, COMP_CHECK_SEEN, DELAY_AFTER_DETECT, COMPLY_WITH_GOOGLE_TRUST_AGENT
+    START_AT_BOOT, PERMISSIONS_GRANTED, SELECTED_NOTIFICATION_MODE, COMP_CHECK_SEEN, DELAY_AFTER_DETECT
 }
 
 class SharedPrefs {
     private var sharedPrefs: SharedPreferences =
         FaceNotify.instance.getSharedPreferences("FaceNotifyPreferences", Context.MODE_PRIVATE)
-
-    fun putStr(key: PrefsKeys, value: String){
-        with(sharedPrefs.edit()){
-            putString(key.name, value)
-            commit()
-        }
-    }
-    fun getStr(key: PrefsKeys): String{
-        return sharedPrefs.getString(key.name,"")!!
-    }
 
     fun putInt(key: PrefsKeys, value: Int){
         with(sharedPrefs.edit()){

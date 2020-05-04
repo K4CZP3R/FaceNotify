@@ -4,12 +4,10 @@ import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Switch
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -19,15 +17,11 @@ import xyz.k4czp3r.facenotify.R
 import xyz.k4czp3r.facenotify.helpers.PrefsKeys
 import xyz.k4czp3r.facenotify.helpers.SharedPrefs
 import xyz.k4czp3r.facenotify.models.NotificationTypes
-import xyz.k4czp3r.facenotify.models.UnlockTypes
-import java.util.*
-import kotlin.concurrent.schedule
+
 
 class FragmentSummary : Fragment(){
-    private val TAG = FragmentSummary::class.qualifiedName
     private val sharedPrefs = SharedPrefs()
     private lateinit var switchService: Switch
-    private lateinit var currentMode: TextView
     private val updateDataHandler = Handler()
     private var updateDataInTheBackground = true
 
@@ -35,10 +29,6 @@ class FragmentSummary : Fragment(){
         fun newInstance(): FragmentSummary{
             return FragmentSummary()
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
@@ -53,13 +43,10 @@ class FragmentSummary : Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         switchService = view.findViewById(R.id.f_summary_switchService)
-        currentMode = view.findViewById(R.id.f_summary_textView_currentMode_value)
-
         switchService.setOnCheckedChangeListener { compoundButton, b ->
             switchServiceChecked(compoundButton.context, b)
 
         }
-
         updateData()
         updateDataRunnable.run()
     }
@@ -114,10 +101,9 @@ class FragmentSummary : Fragment(){
     }
     private fun updateData(){
         changeServiceStateFront(KspBroadcastService.state())
-        currentMode.text = UnlockTypes[sharedPrefs.getInt(PrefsKeys.SELECTED_MODE)].name
     }
 
-    var updateDataRunnable: Runnable = object : Runnable {
+    private var updateDataRunnable: Runnable = object : Runnable {
         override fun run() {
             updateData()
             if(updateDataInTheBackground) updateDataHandler.postDelayed(this, 1000)

@@ -12,7 +12,7 @@ import com.google.android.material.chip.Chip
 import xyz.k4czp3r.facenotify.R
 
 class FragmentAbout : Fragment(), PurchasesUpdatedListener {
-    private val TAG = FragmentAbout::class.qualifiedName
+    private val tagName = FragmentAbout::class.qualifiedName
     private lateinit var billingClient: BillingClient
     private val skuList = listOf("support_the_creator_cocacola", "support_the_creator_eat", "support_the_creator_change")
 
@@ -27,10 +27,6 @@ class FragmentAbout : Fragment(), PurchasesUpdatedListener {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     private fun setupBillingClient(context: Context){
         billingClient = BillingClient.newBuilder(context)
             .enablePendingPurchases()
@@ -39,14 +35,14 @@ class FragmentAbout : Fragment(), PurchasesUpdatedListener {
         billingClient.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(p0: BillingResult?) {
                 if(p0?.responseCode == BillingClient.BillingResponseCode.OK){
-                    Log.i(TAG, "Setup billing ready")
+                    Log.i(tagName, "Setup billing ready")
                     loadAllSKUs()
                     //Setup ok
                 }
             }
 
             override fun onBillingServiceDisconnected() {
-                Log.e(TAG, "Failed")
+                Log.e(tagName, "Failed")
             }
         })
     }
@@ -64,28 +60,29 @@ class FragmentAbout : Fragment(), PurchasesUpdatedListener {
                     val billingFlowParams = BillingFlowParams
                         .newBuilder()
                         .setSkuDetails(skuDetails)
-                    if(skuDetails.sku == "support_the_creator_cocacola"){
-                        chipCola.text = "${skuDetails.price} ${skuDetails.priceCurrencyCode}";
-                        chipCola.setOnClickListener {
-                            billingClient.launchBillingFlow(activity, billingFlowParams.build())
-                        }
-                    }
-                    else if(skuDetails.sku == "support_the_creator_eat"){
-                        chipEat.text = "${skuDetails.price} ${skuDetails.priceCurrencyCode}";
-                        chipEat.setOnClickListener{
-                            billingClient.launchBillingFlow(activity, billingFlowParams.build())
-                        }
-
-                    }
-                    else if(skuDetails.sku == "support_the_creator_change"){
-                        chipChange.text = "${skuDetails.price} ${skuDetails.priceCurrencyCode}";
-
-                        chipChange.setOnClickListener {
+                    when (skuDetails.sku) {
+                        "support_the_creator_cocacola" -> {
+                            chipCola.text = "${skuDetails.price} ${skuDetails.priceCurrencyCode}"
+                            chipCola.setOnClickListener {
                                 billingClient.launchBillingFlow(activity, billingFlowParams.build())
                             }
-                    }
-                    else{
-                        Log.w(TAG, "Not implemented, sku=${skuDetails.sku}")
+                        }
+                        "support_the_creator_eat" -> {
+                            chipEat.text = "${skuDetails.price} ${skuDetails.priceCurrencyCode}"
+                            chipEat.setOnClickListener{
+                                billingClient.launchBillingFlow(activity, billingFlowParams.build())
+                            }
+
+                        }
+                        "support_the_creator_change" -> {
+                            chipChange.text = "${skuDetails.price} ${skuDetails.priceCurrencyCode}"
+                            chipChange.setOnClickListener {
+                                billingClient.launchBillingFlow(activity, billingFlowParams.build())
+                            }
+                        }
+                        else -> {
+                            Log.w(tagName, "Not implemented, sku=${skuDetails.sku}")
+                        }
                     }
                 }
             }

@@ -16,12 +16,12 @@ class CompatibilityChecker {
     fun isDeviceBlacklisted(context: Context): Boolean{
         val deviceName = getDeviceName(context)
         for(device in blacklistedDevices){
-            if(device.Name == deviceName) return true;
+            if(device.Name == deviceName) return true
         }
         return false
     }
     fun getReason(context: Context): String{
-        if(!isDeviceBlacklisted(context)) return "";
+        if(!isDeviceBlacklisted(context)) return ""
         for(device in blacklistedDevices){
             if(device.Name == getDeviceName(context)){
                 return device.Reason

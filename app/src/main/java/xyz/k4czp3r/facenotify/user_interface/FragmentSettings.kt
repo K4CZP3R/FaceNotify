@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,22 +19,18 @@ import xyz.k4czp3r.facenotify.helpers.PrefsKeys
 import xyz.k4czp3r.facenotify.helpers.SharedPrefs
 import xyz.k4czp3r.facenotify.models.DelayAfterDetectTypes
 import xyz.k4czp3r.facenotify.models.NotificationTypes
-import xyz.k4czp3r.facenotify.models.UnlockTypes
 
 class FragmentSettings : Fragment(){
-    private val TAG = FragmentSettings::class.qualifiedName
 
-    private lateinit var spinnerMode: Spinner
     private lateinit var spinnerNotificationMode: Spinner
     private lateinit var switchStartOnBoot: Switch
     private lateinit var permissionsStatus: TextView
     private lateinit var buttonHowToGrant: Button
     private lateinit var buttonRestoreDefault: Button
     private lateinit var spinnerDelayAfterDetect: Spinner
-    private lateinit var switchComplyWithGt: Switch
     private val sharedPrefs: SharedPrefs = SharedPrefs()
     private val permissionHelper = PermissionHelper()
-    private val neededPermissions = listOf(Manifest.permission.READ_LOGS,  Manifest.permission.WRITE_SECURE_SETTINGS)
+    private val neededPermissions = listOf(Manifest.permission.WRITE_SECURE_SETTINGS)
 
 
     companion object{
@@ -55,27 +50,16 @@ class FragmentSettings : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        spinnerMode = view.findViewById(R.id.f_settings_spinnerMode)
         spinnerNotificationMode = view.findViewById(R.id.f_settings_spinnerNotificationMode)
         switchStartOnBoot = view.findViewById(R.id.f_settings_switchStartOnBoot)
         permissionsStatus = view.findViewById(R.id.f_settings_textView_permissionsStatus_value)
         buttonHowToGrant = view.findViewById(R.id.f_settings_button_howtoPerm)
         buttonRestoreDefault = view.findViewById(R.id.f_settings_button_restoreDefault)
         spinnerDelayAfterDetect = view.findViewById(R.id.f_settings_spinnerDelayAfterDetect)
-        switchComplyWithGt = view.findViewById(R.id.f_settings_switchComplyWithGT)
 
 
         updateData(view.context)
 
-        spinnerMode.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                sharedPrefs.putInt(PrefsKeys.SELECTED_MODE, position)
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-        }
 
         spinnerNotificationMode.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -101,7 +85,6 @@ class FragmentSettings : Fragment(){
         switchStartOnBoot.setOnCheckedChangeListener { button, b -> switchStartOnBootChange(button.context, b)}
         buttonHowToGrant.setOnClickListener { v -> buttonHowToGrantClick(v) }
         buttonRestoreDefault.setOnClickListener { v -> buttonRestoreDefaultClick(v) }
-        switchComplyWithGt.setOnCheckedChangeListener { button, b -> switchComplyWithGtChange(button.context, b) }
     }
 
     private fun buttonRestoreDefaultClick(view: View){
@@ -119,10 +102,7 @@ class FragmentSettings : Fragment(){
             .setMessage(activity!!.getString(R.string.how_to_grant_content))
             .show()
     }
-    private fun switchComplyWithGtChange(context: Context, newState: Boolean){
-        sharedPrefs.putBoolean(PrefsKeys.COMPLY_WITH_GOOGLE_TRUST_AGENT, newState)
-        updateData(context)
-    }
+
     private fun switchStartOnBootChange(context: Context, newState: Boolean){
         sharedPrefs.putBoolean(PrefsKeys.START_AT_BOOT, newState)
         updateData(context)
@@ -143,14 +123,7 @@ class FragmentSettings : Fragment(){
         if(notModeId > NotificationTypes.size) notModeId = 0
         spinnerNotificationMode.setSelection(notModeId)
     }
-    private fun updateDataMode(context: Context){
-        //MODE SELECT
-        val modAdapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item,convertUnlockTypesToList())
-        spinnerMode.adapter = modAdapter
-        var modeId = sharedPrefs.getInt(PrefsKeys.SELECTED_MODE)
-        if(modeId > UnlockTypes.size) modeId = 0
-        spinnerMode.setSelection(modeId)
-    }
+
     private fun updateDataStartOnBoot(){
         //START AT BOOT
         val startAtBoot = sharedPrefs.getBoolean(PrefsKeys.START_AT_BOOT)
@@ -158,12 +131,7 @@ class FragmentSettings : Fragment(){
         if(startAtBoot) switchStartOnBoot.text =activity!!.getString(R.string.start_on_boot_switch_on)
         else switchStartOnBoot.text = activity!!.getString(R.string.start_on_boot_switch_off)
     }
-    private fun updateDataComplyWithGT(){
-        val complyWithGt = sharedPrefs.getBoolean(PrefsKeys.COMPLY_WITH_GOOGLE_TRUST_AGENT)
-        switchComplyWithGt.isChecked = complyWithGt
-        if(complyWithGt) switchComplyWithGt.text = activity!!.getString(R.string.comply_with_gt_on)
-        else switchComplyWithGt.text = activity!!.getString(R.string.comply_with_gt_off)
-    }
+
     private fun updateDataMissingPerms(){
         //MISSING PERMISSIONS
         val missingPermissions = arrayListOf<String>()
@@ -183,7 +151,7 @@ class FragmentSettings : Fragment(){
             sharedPrefs.putBoolean(PrefsKeys.PERMISSIONS_GRANTED, false)
         }
         else{
-            permissionsStatus.text = "All permissions are granted!"
+            permissionsStatus.text = activity!!.getString(R.string.permissions_granted)
             sharedPrefs.putBoolean(PrefsKeys.PERMISSIONS_GRANTED, true)
             buttonHowToGrant.visibility =View.GONE
 
@@ -209,17 +177,10 @@ class FragmentSettings : Fragment(){
     private fun updateData(context: Context){
 
         updateDataNotificationMode(context)
-        updateDataMode(context)
         updateDataStartOnBoot()
         updateDataMissingPerms()
         updateDataCompCheck(context)
         updateDataDelayAfterDetect(context)
-        updateDataComplyWithGT()
-
-
-
-
-
     }
     private fun convertDelayAfterUnlockTypesToList(): List<String>{
         val toReturnList = arrayListOf<String>()
@@ -236,11 +197,4 @@ class FragmentSettings : Fragment(){
         return toReturnList
     }
 
-    private fun convertUnlockTypesToList(): List<String>{
-        val toReturnList = arrayListOf<String>()
-        for(ut in UnlockTypes){
-            toReturnList.add(ut.name)
-        }
-        return toReturnList
-    }
 }

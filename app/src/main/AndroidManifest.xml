@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="xyz.k4czp3r.facenotify">
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
-    <uses-permission android:name="android.permission.READ_LOGS"
-        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"
         tools:ignore="ProtectedPermissions"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>

@@ -1,3 +1,5 @@
+@file:Suppress("SpellCheckingInspection")
+
 package xyz.k4czp3r.facenotify.models
 data class DelayAfterDetectType(val id: Int, val value: Int, val readable: String)
 

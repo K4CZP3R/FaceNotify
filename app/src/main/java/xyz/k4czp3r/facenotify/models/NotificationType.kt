@@ -1,6 +1,5 @@
 package xyz.k4czp3r.facenotify.models
 
-import android.provider.Settings.Global.getString
 import xyz.k4czp3r.facenotify.FaceNotify
 import xyz.k4czp3r.facenotify.R
 

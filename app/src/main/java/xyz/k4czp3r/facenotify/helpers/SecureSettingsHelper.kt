@@ -7,7 +7,7 @@ enum class SecureSetting{
     lock_screen_show_notifications, lock_screen_allow_private_notifications
 }
 
-class SecureSettingsHelper() {
+class SecureSettingsHelper {
     fun putStr(key: SecureSetting, value: String): Boolean{
         Settings.Secure.putString(FaceNotify.instance.contentResolver, key.name, value)
         return true
