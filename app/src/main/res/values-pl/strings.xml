@@ -37,9 +37,6 @@
     <string name="notification_mode_content">Ukryj tylko zawartość</string>
     <string name="service_restart_required_title">Usługa musi zostać ponownie uruchomiona</string>
     <string name="service_restart_required_content">Aby zmiany zostały aktywowane, usługa musi zostać zrestartowana!</string>
-    <string name="comply_with_gt">Bierz Google Smartlock pod uwagę</string>
-    <string name="comply_with_gt_unknown">Nieznany</string>
-    <string name="comply_with_gt_on">Bierze pod uwagę</string>
-    <string name="comply_with_gt_off">Ignoruje smartlock</string>
+    <string name="permissions_granted">All uprawnienia przyznane!</string>
 
 </resources>

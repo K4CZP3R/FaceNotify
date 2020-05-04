@@ -56,10 +56,7 @@
 
     <string name="service_restart_required_title">Service restart required</string>
     <string name="service_restart_required_content">A service restart is required to apply new settings!</string>
+    <string name="permissions_granted">All permissions are granted!</string>
 
-    <string name="comply_with_gt">Comply with Smartlock</string>
-    <string name="comply_with_gt_unknown">Unknown</string>
-    <string name="comply_with_gt_on">Complies with smartlock state</string>
-    <string name="comply_with_gt_off">Ignores Smartlock state</string>
 
 </resources>

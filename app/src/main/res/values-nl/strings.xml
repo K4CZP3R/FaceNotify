@@ -37,9 +37,7 @@
     <string name="notification_mode_content">Verberg alleen inhoud</string>
     <string name="service_restart_required_title">Service dient opnieuw op te starten</string>
     <string name="service_restart_required_content">Service moet opnieuw opgestart worden om gemaakte veranderingen toe te passen</string>
-    <string name="comply_with_gt">Werk met Google Smartlock</string>
-    <string name="comply_with_gt_unknown">Onbekend</string>
-    <string name="comply_with_gt_on">Werkt met Smartlock</string>
-    <string name="comply_with_gt_off">Negeert Smartlock</string>
+    <string name="permissions_granted">Alle toestemingen zijn OK!</string>
+
 
 </resources>
