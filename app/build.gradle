@@ -1,124 +1,53 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
-
-ext.versionMajor = 1
-ext.versionMinor = 5
+ext.versionMajor = 2
+ext.versionMinor = 0
 ext.versionPatch = 6
+
 android {
-    compileSdkVersion 29
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
+
     defaultConfig {
         applicationId "k4czp3r.facenotify"
         minSdkVersion 27
-        targetSdkVersion 29
+        targetSdkVersion 28
         versionCode generateVersionCode()
         versionName generateVersionName()
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
-        release_alpha {
-            minifyEnabled false
-            shrinkResources false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            String versionTrack = "alpha"
-            versionNameSuffix ".${versionTrack}"
-            resValue "string", "app_version", "${defaultConfig.versionName}"
-            resValue "string", "app_track", "${versionTrack}"
-        }
-        release_beta {
-            minifyEnabled false
-            shrinkResources false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            String versionTrack = "beta"
-            versionNameSuffix ".${versionTrack}"
-            resValue "string", "app_version", "${defaultConfig.versionName}"
-            resValue "string", "app_track", "${versionTrack}"
-        }
         release {
-            minifyEnabled true
-            shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            String versionTrack = "release"
-            versionNameSuffix ".${versionTrack}"
-            resValue "string", "app_version", "${defaultConfig.versionName}"
-            resValue "string", "app_track", "${versionTrack}"
-        }
-        debug {
-            String versionTrack = "debug"
-            versionNameSuffix ".${versionTrack}"
-            resValue "string", "app_version", "${defaultConfig.versionName}"
-            resValue "string", "app_track", "${versionTrack}"
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    packagingOptions {
-        exclude 'META-INF/proguard/androidx-annotations.pro'
-    }
-    lintOptions {
-        abortOnError false
-        checkReleaseBuilds false
-    }
-    productFlavors {
-    }
+
 }
 
-private Integer generateVersionCode() {
+private Integer generateVersionCode(){
     return ext.versionMajor * 100 + ext.versionMinor * 10 + ext.versionPatch * 1;
 }
-
-private String generateVersionName() {
-    String versionName = "${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"
-    return versionName;
+private String generateVersionName(){
+    return "${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
-    implementation 'com.google.android.gms:play-services-ads:17.2.1' //adshit
+    implementation 'com.google.android.material:material:1.2.0-alpha06'
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    implementation 'com.jaredrummler:android-device-names:2.0.0'
+    implementation 'com.android.billingclient:billing:2.2.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }
-
-dependencies {
-    implementation 'com.github.medyo:android-about-page:1.2.5'
-}
-android {
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-}
-repositories {
-    maven { url 'https://jitpack.io' }
-}
-dependencies {
-    def libsuVersion = '2.2.0'
-    implementation "com.github.topjohnwu.libsu:core:${libsuVersion}"
-    implementation "com.github.topjohnwu.libsu:io:${libsuVersion}"
-    implementation "com.github.topjohnwu.libsu:busybox:${libsuVersion}"
-}
-
-dependencies {
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-}
-
-
-dependencies {
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.google.android.material:material:1.0.0'
-}
-
-dependencies {
-    implementation 'com.android.volley:volley:1.1.1'
-}
-dependencies {
-    implementation 'com.tananaev:adblib:1.2'
-    implementation 'commons-codec:commons-codec:1.10'
-}
-
-dependencies {
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-}
-

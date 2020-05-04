@@ -1,271 +1,65 @@
 <resources>
-    <!-- AAAA_B_C_D(_D)
-    AAAA: St(artup)Ac(tivity)
-    B: java/xml
-    C: java=function name (without _), xml=item name
-    D: custom type -->
+    <string name="app_name" translatable="false">FaceNotify</string>
+    <string name="notification_channel_id" translatable="false">ksp_broadcast_service</string>
+    <string name="notification_channel_name">FaceNotify Broadcast Service</string>
 
-    <string name="app_name" translatable="false">Face Notify</string>
+    <string name="notification_mode_whole">Hide whole notification</string>
+    <string name="notification_mode_content">Hide only content</string>
 
-    <!-- universal strings -->
-    <string name="univ___yes">Yes</string>
-    <string name="univ___no">No</string>
-    <string name="univ___ok">Ok</string>
-    <string name="univ___done">Done</string>
+    <string name="current_mode_key">Current mode:</string>
+    <string name="current_mode_value">Unknown</string>
+    <string name="service_switch_unknown">Service is …</string>
+    <string name="service_switch_off">Service is off</string>
+    <string name="service_switch_on">Service is on</string>
 
-    <!-- activity_startup.xml -->
-    <string name="tv_intro_text">Thanks for downloading FaceNotify!\n
-        To be able to use FaceNotify you will need to grant some permissions!
-    </string>
-    <string name="tv_adb_permission_info">The following permissions are required.\n\n
-        READ_LOGS: Without it, detecting face is not possible.\n
-        WRITE_SECURE_SETTINGS: Enables app to show/hide notifications.\n
-        DUMP: Allows to check service status.\n
-        PACKAGE_USAGE_STATS: the same usage as DUMP permission.
-    </string>
-    <string name="btn_adb_permissions_grant">Grant</string>
-    <string name="btn_adb_permissions_granted">Already granted!</string>
+    <string name="set_mode_key">Unlock mode</string>
 
-    <string name="tv_log_permission_info">The following permissions are optional.\n\n
-        WRITE_EXTERNAL_STORAGE: Allows to save log to file.
-    </string>
-    <string name="btn_log_permissions_grant">Grant</string>
+    <string name="service_status_not_changed">This change was already active</string>
+    <string name="service_status_changed">Service status changed!</string>
+    <string name="start_on_boot_switch_on">Service will start at boot</string>
+    <string name="start_on_boot_switch_off">Service won\'t start at boot</string>
+    <string name="start_on_boot_switch_unknown">Service …</string>
 
-    <string name="tv_reboot_info">Is it your first install? Then you should reboot your phone.</string>
-    <string name="btn_reboot">Reboot</string>
+    <string name="permissions_status_key">Permissions status</string>
+    <string name="permissions_status_value" translatable="false">…</string>
 
-    <string name="btn_continue">Continue</string>
-    <string name="btn_ignore_battopt">Ignore battery optimisations</string>
+    <string name="missing_permissions">Can\'t start service, Missing permissions!</string>
+    <string name="how_to_grant_button">How to grant</string>
+    <string name="how_to_grant_title">How to grant this permissions</string>
+    <string name="how_to_grant_content">Just enter\nadb shell pm grant xyz.k4czp3r.facenotify *name of the permission*</string>
 
-    <string name="stac_java_rebootquestion_dialog_title">Reboot your phone</string>
-    <string name="stac_java_rebootquestion_dialog_content">Manually reboot your phone now, or if you have root, just click ok</string>
+    <string name="restore_default">Restore default settings</string>
+    <string name="restore_default_button">Restore</string>
 
-    <string name="stac_java_grantadbpermissionsrootquestion_dialog_title">Root rights (optional)</string>
-    <string name="stac_java_grantadbpermissionsrootquestion_dialog_content">Is your device rooted? It will make things easier. If not you will need PC with FaceNotify helper (one time only)</string>
+    <string name="current_notification_mode_key">Current notification mode</string>
+    <string name="OK" translatable="false">OK</string>
 
-    <string name="stac_java_ignorerootpermissionsonclick_dialog_title">Enter following commands via adb</string>
-    <string name="stac_java_ignorerootpermissionsonclick_dialog_content" translatable="false">You need to enter following commands in adb:&lt;br&gt;&lt;br&gt;1. &lt;font color="red"&gt;adb shell pm grant k4czp3r.facenotify android.permission.READ_LOGS&lt;/font&gt;&lt;br&gt;&lt;br&gt;2. &lt;font color="red"&gt;adb shell pm grant k4czp3r.facenotify android.permission.WRITE_SECURE_SETTINGS&lt;/font&gt;&lt;br&gt;&lt;br&gt;3. &lt;font color="red"&gt;adb shell pm grant k4czp3r.facenotify android.permission.DUMP&lt;br&gt;&lt;br&gt;4. &lt;font color="red"&gt;adb shell pm grant k4czp3r.facenotify android.permission.PACKAGE_USAGE_STATS</string>
+    <string name="device_unsupported_title">Not supported device</string>
+    <string name="device_unsupported_message">This device is known to not work with this app! (At least at stock firmware)</string>
 
+    <string name="start_on_boot">Start on boot</string>
 
+    <string name="missing_permissions_title">Missing some permissions</string>
+    <string name="missing_permissions_content">This app misses some permissions, look at settings to see how to grant them.</string>
 
-    <!-- end of activity_startup -->
-    <string name="service_channel_name">FaceNotify - Service</string>
-    <string name="service_channel_description">This keeps Face Notify in background to actively detect face and apply notification changes.</string>
+    <string name="creator">Made by K4CZP3R</string>
+    <string name="contributors">Without them I would never support so many devices</string>
+    <string name="contributors_names" translatable="false">suenky91\nMatzgitz\nAlexZorzi\nMr.Januzi\nSaad Kothiwala\nGianluigi Vitelli</string>
 
+    <string name="inapp_p_cocacola">Buy me a drink</string>
+    <string name="inapp_p_eat">Buy me something to eat</string>
+    <string name="inapp_p_change">Give me some spare change</string>
+    <string name="support_me">Support me:</string>
 
-    <string name="tv_serviceStatus_key">Service status:</string>
-    <string name="tv_serviceStatus_value_on">Enabled</string>
-    <string name="tv_serviceStatus_value_off">Disabled</string>
-    <string name="tv_serviceStatus_value_unk">Unknown</string>
+    <string name="delay_after_detect_key">Delay after detection:</string>
+    <string name="notification_content">Service is active.</string>
 
-    <string name="tv_workingMode_key">Working method:</string>
-    <string name="tv_workingMode_value_root">Root</string>
-    <string name="tv_workingMode_value_noroot">Non-Root</string>
-    <string name="tv_workingMode_value_unk">Unknown</string>
+    <string name="service_restart_required_title">Service restart required</string>
+    <string name="service_restart_required_content">A service restart is required to apply new settings!</string>
 
-    <string name="btn_startService">Start service</string>
-    <string name="btn_stopService">Stop service</string>
-
-    <string name="btn_startService_onClick_toast_started">Service should be working now! Go test it out!</string>
-    <string name="btn_startService_onClick_toast_already">Service is already running!</string>
-
-    <string name="btn_stopService_onClick_toast_stopped">Service is stopped!</string>
-    <string name="btn_stopService_onClick_toast_already">Service is already disabled!</string>
-
-    <string name="action_settings">Settings</string>
-
-    <string name="title_activity_ksp_main">Face Notify</string>
-    <string name="title_activity_ksp_settings">Settings</string>
-
-    <string name="tv_update_key">Update</string>
-    <string name="tv_update_value_ready">Ready to download!</string>
-    <string name="tv_permission_value_denied">Denied</string>
-
-
-    <string name="button_clear_logs_text">Clear logs</string>
-    <!-- Preferences -->
-    <string name="pref_is_device_rooted" translatable="false">isDeviceRooted</string>
-    <string name="pref_intro_root" translatable="false">askedForRoot</string>
-    <!-- kspUpdater -->
-    <string name="ksup_java_kspupdater_serverbackendurl" translatable="false">https://kspfacenotify.kacperswebsite.xyz/b/</string>
-    <string name="ksup_java_kspshowchangelogonresponse_dialog_title">Changelog</string>
-    <string name="ksup_java_kspappupdatecheck_dialog_title">Update is ready to download!</string>
-    <string name="ksup_java_kspappupdatecheck_dialog_content">There is a new update. Go to Google Play and download it! (%s)</string>
-
-    <!-- content_ksp_main and ui.MainActivity -->
-    <!-- AAAA_B_C_D(_D)
-    AAAA: St(artup)Ac(tivity)
-    B: java/xml
-    C: java=function name (without _), xml=item name
-    D: custom type -->
-
-    <string name="maac_java_oncreate_toast_nvtdfail">Setting secure settings filed, look at logcat/applog for more info!</string>
-    <string name="maac_java_oncreate_toast_servicestarted">Service started! Go check it out!</string>
-    <string name="maac_java_oncreate_toast_servicealreadyrunning">Service is already running!</string>
-    <string name="maac_java_oncreate_toast_servicestopped">Service stopped! Reverting settings!</string>
-    <string name="maac_java_oncreate_toast_servicealreadystopped">Service is already off!</string>
-
-    <string name="maac_xml_tv_service_status">Service status: </string>
-    <string name="maac_xml_tv_service_active">Active</string>
-    <string name="maac_xml_tv_service_disabled">Disabled</string>
-    <string name="maac_xml_tv_service_unknown">Unknown</string>
-    <string name="maac_xml_btn_stopservice">Stop service</string>
-    <string name="maac_xml_btn_startservice">Start service</string>
-
-    <string name="maac_xml_btn_value_alreadyrunning" translatable="false">@string/maac_java_oncreate_toast_servicealreadyrunning</string>
-    <string name="maac_xml_btn_value_started" translatable="false">@string/maac_java_oncreate_toast_servicestarted</string>
-    <string name="maac_xml_btn_value_stopped" translatable="false">@string/maac_java_oncreate_toast_servicestopped</string>
-    <string name="maac_xml_btb_value_alreadystopped">@string/maac_java_oncreate_toast_servicealreadystopped</string>
-
-    <!-- activity_comp_check and ui.CompCheck -->
-    <string name="tv_option1_key">Custom ROM (crDroid, OmniROM)</string>
-    <string name="tv_option2_key">OnePlus - OOS</string>
-    <string name="tv_option3_key">Samsung (not working)</string>
-    <string name="tv_how_to">Lock your device and unlock it using your face!\nValues should update,\nif you see true, use this option in settings!</string>
-
-    <!-- KspANotherService.java -->
-    <string name="notification_boot_title">FaceNotify - Ready to start</string>
-    <string name="notification_boot_text">Click this notification to start FaceNotify service!</string>
-
-    <string name="service_cname">FaceNotify - Service</string>
-    <string name="service_desc">This keeps Face Notify in background to actively detect face and apply notification changes.</string>
-
-    <!-- Hidden preferences -->
-    <string name="pref_first_boot" translatable="false">kspFirstBoot</string>
-    <string name="pref_new_version" translatable="false">kspNewVersion</string>
-    <!-- Preferences tools xml -->
-    <string name="pref_tools__header">Tools</string>
-    <string name="pref_restore_defaults__key" translatable="false">kspRestoreDefaults</string>
-    <string name="pref_restore_defaults__summary">Will fix problems with notifications appearance</string>
-    <string name="pref_restore_defaults__title">Restore defaults</string>
-
-    <string name="pref_fix_logcat__key" translatable="false">kspFixLogcat</string>
-    <string name="pref_fix_logcat__summary">Click me if nothing happens when recognizing your face!</string>
-    <string name="pref_fix_logcat__title">Fix logs</string>
-
-    <string name="pref_run_tester__key" translatable="false">kspRunTester</string>
-    <string name="pref_run_tester__summary">Check if app supports your phone!</string>
-    <string name="pref_run_tester__title">Run Tester</string>
-
-    <!-- Preferences app logger xml -->
-    <string name="pref_app_logger__header">App logger</string>
-
-    <string name="pref_log_to_file__key" translatable="false">kspLogToFile</string>
-    <string name="pref_log_to_file__summary">Log app to file (FaceNotify.log)</string>
-    <string name="pref_log_to_file__title">Save log to file</string>
-
-    <string name="pref_wipe_log_file__key" translatable="false">kspWipeLogFile</string>
-    <string name="pref_wipe_log_file__summary">Clears log file</string>
-    <string name="pref_wipe_log_file__title">Wipe log file</string>
-    <!-- Preferences general xml -->
-    <string name="pref_general_header">General</string>
-
-    <string name="pref_current_device__key" translatable="false">kspDevice</string>
-    <string name="pref_current_device__title">Your phone</string>
-    <string name="pref_current_device__summary">Unknown</string>
-
-    <string name="pref_device_supported__key" translatable="false">kspDeviceSupported</string>
-    <string name="pref_device_supported__summary">Unknown</string>
-    <string name="pref_device_supported__title">Device status</string>
-    <string name="pref_device_supported__option_supported">Supported</string>
-    <string name="pref_device_supported__option_not_supported">Not supported!</string>
-
-    <string name="pref_app_version__key" translatable="false">kspAppVersion</string>
-    <string name="pref_app_version__summary">Unknown</string>
-    <string name="pref_app_version__title">Version</string>
-
-
-    <string name="pref_ignore_battopt__key" translatable="false">kspIgnoreBattopt</string>
-    <string name="pref_ignore_battopt__summary">Ignore battery optimisations for FaceNotify (won\'t get killed in the background)</string>
-    <string name="pref_ignore_battopt__title">Ignore battery optimisations</string>
-
-    <string name="pref_send_feedback__key" translatable="false">kspSendFeedback</string>
-    <string name="pref_send_feedback__summary">Send me your feedback!</string>
-    <string name="pref_send_feedback__title">Send feedback</string>
-
-
-    <string name="pref_ignore_fn_start__key" translatable="false">kspIgnoreStartTime</string>
-    <string name="pref_ignore_fn_start__summary">From which time, always show notification content</string>
-    <string name="pref_ignore_fn_start__title">Always show notifications from:</string>
-
-    <string name="pref_ignore_fn_end__key" translatable="false">kspIgnoreEndTime</string>
-    <string name="pref_ignore_fn_end__summary">To which time, always show notification content</string>
-    <string name="pref_ignore_fn_end__title">Always show notification to: </string>
-
-    <!-- Preferences face recognition -->
-    <string name="pref_face_recognition_header">Face recognition</string>
-
-    <string name="pref_face_recognition_settings__key" translatable="false">andFaceRecognitionSettings</string>
-    <string name="pref_face_recognition_settings__title">Face recognition settings</string>
-    <string name="pref_face_recognition_settings__summary">Opens a settings app</string>
-
-    <string name="pref_fr_delay_key" translatable="false">frDelay</string>
-    <string name="pref_fr_delay_title">Delay after face is recognized (ms)</string>
-
-
-    <string name="pref_fr_hide_type_key" translatable="false">frHideType</string>
-    <string name="pref_fr_hide_type_title">Notification hide type</string>
-    <string name="pref_fr_hide_type_value_content" translatable="false">lock_screen_allow_private_notifications</string>
-    <string name="pref_fr_hide_type_value_notification" translatable="false">lock_screen_show_notifications</string>
-    <string-array name="pref_fr_hide_type_titles">
-        <item>Whole notification</item>
-        <item>Only content</item>
-    </string-array>
-    <string-array name="pref_fr_hide_type_values">
-        <item>@string/pref_fr_hide_type_value_notification</item>
-        <item>@string/pref_fr_hide_type_value_content</item>
-    </string-array>
-
-    <string name="pref_fr_anim_type__key" translatable="false">frAnimType</string>
-    <string name="pref_fr_anim_type__title">Notification show animation</string>
-    <string name="pref_fr_anim_type__value_fast" translatable="false">fast</string>
-    <string name="pref_fr_anim_type__value_flow" translatable="false">flow</string>
-    <string-array name="pref_fr_anim_type__titles">
-        <item>As-fast-as-possible</item>
-        <item>Slow, but with a flow</item>
-    </string-array>
-    <string-array name="pref_fr_anim_type__values">
-        <item>@string/pref_fr_anim_type__value_fast</item>
-        <item>@string/pref_fr_anim_type__value_flow</item>
-    </string-array>
-
-    <string name="pref_title_fr_start_at_boot">Start at boot</string>
-    <string name="pref_key_fr_start_at_boot" translatable="false">frStartAtBoot</string>
-    <string-array name="pref_fr_start_at_boot_titles">
-        <item>On</item>
-        <item>Off</item>
-    </string-array>
-    <string-array name="pref_fr_start_at_boot_values">
-        <item>true</item>
-        <item>false</item>
-    </string-array>
-
-    <string name="pref_fr_detect_mode__key" translatable="false">kspDetectMode</string>
-    <string name="pref_fr_detect_mode__title">Detection mode</string>
-    <string-array name="pref_fr_detect_mode__titles">
-        <item>OnePlus (OxygenOS)</item>
-        <item>AOSP (smartlock)</item>
-        <item>Xiaomi (MIUI)</item>
-        <item>Samsung (Face scan)</item>
-        <item>Samsung (Iris scan)</item>
-        <item>Samsung (Intelligent scan)</item>
-        <item>LG</item>
-        <item>Samsung S20 (Face scan)</item>
-    </string-array>
-    <string-array name="pref_fr_detect_mode__values">
-        <item>oneplus</item>
-        <item>smartlock</item>
-        <item>miui</item>
-        <item>samsung_face</item>
-        <item>samsung_iris</item>
-        <item>samsung_intelligent</item>
-        <item>lg</item>
-        <item>samsung_s20_face</item>
-
-    </string-array>
-
-
-
-
+    <string name="comply_with_gt">Comply with Smartlock</string>
+    <string name="comply_with_gt_unknown">Unknown</string>
+    <string name="comply_with_gt_on">Complies with smartlock state</string>
+    <string name="comply_with_gt_off">Ignores Smartlock state</string>
 
 </resources>

@@ -1,58 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="k4czp3r.facenotify">
-
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
-    <uses-permission android:name="android.permission.DUMP" />
-    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
+    xmlns:tools="http://schemas.android.com/tools"
+    package="xyz.k4czp3r.facenotify">
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.READ_LOGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"
+        tools:ignore="ProtectedPermissions"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="com.android.vending.BILLING" />
     <application
-        android:name=".FaceNotifyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-2847518732058964~3723283789"/>
-
-        <activity android:name=".ui.LogViewer" />
-        <activity android:name=".ui.CompCheck" />
-
-        <activity
-            android:name=".ui.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name=".ui.StartupActivity">
+        android:theme="@style/AppTheme"
+        android:name="xyz.k4czp3r.facenotify.FaceNotify"
+        >
+        <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".KspBroadcastService"/>
 
-
-        <activity
-            android:name=".ui.SettingsActivity"
-            android:label="@string/title_activity_ksp_settings" />
-        <receiver android:name=".service.KspBootBroadcastReceiver">
+        <receiver android:name=".KspBootCompletedReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
 
-        <service
-            android:name=".service.KspBootService"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-        <service android:name=".service.KspAnotherService" />
     </application>
 
 </manifest>
