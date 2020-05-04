@@ -13,6 +13,8 @@ public class KspConfig {
     private static final Map<String, String> samsung_iris = new HashMap<>();
     private static final Map<String, String> samsung_face = new HashMap<>();
 
+    private static final Map<String, String> samsung_s20_face = new HashMap<>();
+
     private static final Map<String, Map<String, String>> phones = new HashMap<String, Map<String, String>>();
 
 
@@ -53,15 +55,21 @@ public class KspConfig {
         samsung_intelligent.put("valid", ": 2");
         samsung_intelligent.put("readable", "Samsung (Intelligent scan)");
 
+        samsung_s20_face.put("detectLine","BiometricServiceBase: handleAuthenticated: ");
+        samsung_s20_face.put("detectLine_v2","handleAuthenticated: ");
+        samsung_s20_face.put("valid","true");
+        samsung_s20_face.put("readable","Samsung S20 (Face scan)");
 
-        phones.put("oneplus", oneplus);
-        phones.put("smartlock", smartlock);
-        phones.put("miui", miui);
-        phones.put("lg",lg);
 
-        phones.put("samsung_face",samsung_face);
-        phones.put("samsung_iris",samsung_iris);
-        phones.put("samsung_intelligent", samsung_intelligent);
+        phones.put(DM_oneplus(), oneplus);
+        phones.put(DM_smartlock(), smartlock);
+        phones.put(DM_miui(), miui);
+        phones.put(DM_lg(),lg);
+
+        phones.put(DM_samsung_face(),samsung_face);
+        phones.put(DM_samsung_iris(),samsung_iris);
+        phones.put(DM_samsung_intelligent(), samsung_intelligent);
+        phones.put(DM_samsung_s20_face(), samsung_s20_face);
 
         phones_name.put("ONEPLUS_A6003", "OnePlus 6");
         phones_name.put("ONEPLUS_A6013", "OnePlus 6");
@@ -92,5 +100,6 @@ public class KspConfig {
     public String DM_samsung_intelligent(){
         return "samsung_intelligent";
     }
+    public String DM_samsung_s20_face(){return "samsung_s20_face";}
     public String DM_lg(){ return "lg";}
 }

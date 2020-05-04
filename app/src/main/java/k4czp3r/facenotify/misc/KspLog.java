@@ -1,6 +1,7 @@
 package k4czp3r.facenotify.misc;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Environment;
 import androidx.core.app.ActivityCompat;
@@ -63,7 +64,8 @@ public class KspLog {
     }
     private File getLogFile(){
         if(permissionGranted() && saveToFile()){
-            File logFile = new File(Environment.getExternalStorageDirectory(),"FaceNotify.log");
+            File logFile = new File(FaceNotifyApp.getAppContext().getFilesDir()
+                    ,"FaceNotify.log");
             if(!logFile.exists()){
                 try{
                     boolean cnfResult = logFile.createNewFile();

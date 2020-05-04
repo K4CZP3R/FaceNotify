@@ -250,6 +250,7 @@
         <item>Samsung (Iris scan)</item>
         <item>Samsung (Intelligent scan)</item>
         <item>LG</item>
+        <item>Samsung S20 (Face scan)</item>
     </string-array>
     <string-array name="pref_fr_detect_mode__values">
         <item>oneplus</item>
@@ -259,6 +260,7 @@
         <item>samsung_iris</item>
         <item>samsung_intelligent</item>
         <item>lg</item>
+        <item>samsung_s20_face</item>
 
     </string-array>
 

@@ -41,7 +41,8 @@ public class CompCheck extends AppCompatActivity {
                 findViewById(R.id.textView_option4_value),
                 findViewById(R.id.textView_option5_value),
                 findViewById(R.id.textView_option6_value),
-                findViewById(R.id.textView_option7_value)
+                findViewById(R.id.textView_option7_value),
+                findViewById(R.id.textView_option8_value)
 
         };
         TextView[] option_key = new TextView[]{
@@ -51,7 +52,8 @@ public class CompCheck extends AppCompatActivity {
                 findViewById(R.id.textView_option4_key),
                 findViewById(R.id.textView_option5_key),
                 findViewById(R.id.textView_option6_key),
-                findViewById(R.id.textView_option7_key)
+                findViewById(R.id.textView_option7_key),
+                findViewById(R.id.textView_option8_key)
         };
 
 
@@ -62,7 +64,8 @@ public class CompCheck extends AppCompatActivity {
                 kspConfig.DM_samsung_face(),
                 kspConfig.DM_samsung_iris(),
                 kspConfig.DM_samsung_intelligent(),
-                kspConfig.DM_lg()
+                kspConfig.DM_lg(),
+                kspConfig.DM_samsung_s20_face()
         };
 
         for(int n = 0; n<detect_type.length; n++){
