@@ -12,41 +12,54 @@ class KspFaceDetection {
     private val secureSettingsHelper = SecureSettingsHelper()
     private val sharedPrefs = SharedPrefs()
 
-    fun restoreDefaultNotificationSettings(){
+    fun restoreDefaultNotificationSettings() {
         secureSettingsHelper.putStr(SecureSetting.lock_screen_show_notifications, "1")
         secureSettingsHelper.putStr(SecureSetting.lock_screen_allow_private_notifications, "1")
     }
 
-    fun prepareSecureSettingsFor(notificationType: NotificationType){
-        when(notificationType.instruction){
-            InstructionTypes.whole_notification ->{
-                secureSettingsHelper.putStr(SecureSetting.lock_screen_allow_private_notifications, "1")
+    fun prepareSecureSettingsFor(notificationType: NotificationType) {
+        when (notificationType.instruction) {
+            InstructionTypes.whole_notification -> {
+                secureSettingsHelper.putStr(
+                    SecureSetting.lock_screen_allow_private_notifications,
+                    "1"
+                )
                 secureSettingsHelper.putStr(SecureSetting.lock_screen_show_notifications, "0")
             }
-            InstructionTypes.only_content ->{
+            InstructionTypes.only_content -> {
                 secureSettingsHelper.putStr(SecureSetting.lock_screen_show_notifications, "1")
-                secureSettingsHelper.putStr(SecureSetting.lock_screen_allow_private_notifications, "0")
+                secureSettingsHelper.putStr(
+                    SecureSetting.lock_screen_allow_private_notifications,
+                    "0"
+                )
             }
         }
     }
 
-    fun showNotifications(){
-        when(NotificationTypes[sharedPrefs.getInt(PrefsKeys.SELECTED_NOTIFICATION_MODE)].instruction){
+    fun showNotifications() {
+        when (NotificationTypes[sharedPrefs.getInt(PrefsKeys.SELECTED_NOTIFICATION_MODE)].instruction) {
             InstructionTypes.whole_notification -> {
                 secureSettingsHelper.putStr(SecureSetting.lock_screen_show_notifications, "1")
             }
             InstructionTypes.only_content -> {
-                secureSettingsHelper.putStr(SecureSetting.lock_screen_allow_private_notifications, "1")
+                secureSettingsHelper.putStr(
+                    SecureSetting.lock_screen_allow_private_notifications,
+                    "1"
+                )
             }
         }
     }
-    fun hideNotifications(){
-        when(NotificationTypes[sharedPrefs.getInt(PrefsKeys.SELECTED_NOTIFICATION_MODE)].instruction){
+
+    fun hideNotifications() {
+        when (NotificationTypes[sharedPrefs.getInt(PrefsKeys.SELECTED_NOTIFICATION_MODE)].instruction) {
             InstructionTypes.whole_notification -> {
                 secureSettingsHelper.putStr(SecureSetting.lock_screen_show_notifications, "0")
             }
             InstructionTypes.only_content -> {
-                secureSettingsHelper.putStr(SecureSetting.lock_screen_allow_private_notifications, "0")
+                secureSettingsHelper.putStr(
+                    SecureSetting.lock_screen_allow_private_notifications,
+                    "0"
+                )
             }
         }
     }

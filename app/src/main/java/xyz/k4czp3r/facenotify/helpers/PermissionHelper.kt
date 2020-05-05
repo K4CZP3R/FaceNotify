@@ -4,10 +4,13 @@ import android.content.pm.PackageManager
 import xyz.k4czp3r.facenotify.FaceNotify
 
 class PermissionHelper {
-    fun isPermissionGranted(permName: String): Boolean{
+    fun isPermissionGranted(permName: String): Boolean {
         val appContext = FaceNotify.instance.applicationContext
         val packageName = appContext.packageName
-        return appContext.packageManager.checkPermission(permName, packageName) == PackageManager.PERMISSION_GRANTED
+        return appContext.packageManager.checkPermission(
+            permName,
+            packageName
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     /*fun askForPermission(activity: Activity, permNames: Array<String>, requestCode: Int){

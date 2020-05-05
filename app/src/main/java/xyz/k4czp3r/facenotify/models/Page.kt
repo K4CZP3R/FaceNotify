@@ -3,15 +3,18 @@ package xyz.k4czp3r.facenotify.models
 class Page(
     private val name: String,
     private val icon: Int,
-    private val position: Int) {
+    private val position: Int
+) {
 
-    fun getPageName(): String{
+    fun getPageName(): String {
         return name
     }
-    fun getPageIcon(): Int{
+
+    fun getPageIcon(): Int {
         return icon
     }
-    fun getPagePosition(): Int{
+
+    fun getPagePosition(): Int {
         return position
     }
 

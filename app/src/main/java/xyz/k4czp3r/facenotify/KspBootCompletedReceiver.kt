@@ -7,18 +7,17 @@ import android.util.Log
 import xyz.k4czp3r.facenotify.helpers.PrefsKeys
 import xyz.k4czp3r.facenotify.helpers.SharedPrefs
 
-class KspBootCompletedReceiver : BroadcastReceiver(){
+class KspBootCompletedReceiver : BroadcastReceiver() {
     private val tagName = KspBootCompletedReceiver::class.qualifiedName
     private val sharedPrefs = SharedPrefs()
     override fun onReceive(context: Context?, intent: Intent?) {
-        if(intent?.action != Intent.ACTION_BOOT_COMPLETED) return
+        if (intent?.action != Intent.ACTION_BOOT_COMPLETED) return
 
 
-        if(sharedPrefs.getBoolean(PrefsKeys.START_AT_BOOT)){
+        if (sharedPrefs.getBoolean(PrefsKeys.START_AT_BOOT)) {
             Log.i(tagName, "Start at boot is enabled, so starting service!")
             KspBroadcastService.start(context!!)
-        }
-        else{
+        } else {
             Log.i(tagName, "Start at boot is disabled, so skipping service start!")
         }
     }

@@ -34,19 +34,22 @@ class KspBroadcastService : Service() {
 
     override fun onDestroy() {
         Log.v(tagName, "onDestroy, unregister receiver!")
-        try{
+        try {
             unregisterReceiver(br)
-        }
-        catch(e: Exception){
+        } catch (e: Exception) {
             Log.w(tagName, "Tried to unregister receiver, failed!")
             e.printStackTrace()
         }
     }
-    override fun onCreate(){
+
+    override fun onCreate() {
         super.onCreate()
 
 
-        val channelId = createNotificationChannel(getString(R.string.notification_channel_id), getString(R.string.notification_channel_name))
+        val channelId = createNotificationChannel(
+            getString(R.string.notification_channel_id),
+            getString(R.string.notification_channel_name)
+        )
         val builder = NotificationCompat.Builder(this, channelId)
             .setOngoing(true)
             .setContentTitle(getString(R.string.app_name))
@@ -62,9 +65,11 @@ class KspBroadcastService : Service() {
 
     }
 
-    private fun createNotificationChannel(channelId: String, channelName: String): String{
-        val chan = NotificationChannel(channelId,
-            channelName, NotificationManager.IMPORTANCE_NONE)
+    private fun createNotificationChannel(channelId: String, channelName: String): String {
+        val chan = NotificationChannel(
+            channelId,
+            channelName, NotificationManager.IMPORTANCE_NONE
+        )
         chan.lightColor = Color.BLUE
         chan.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
         val service = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

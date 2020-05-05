@@ -20,7 +20,7 @@ import xyz.k4czp3r.facenotify.helpers.SharedPrefs
 import xyz.k4czp3r.facenotify.models.DelayAfterDetectTypes
 import xyz.k4czp3r.facenotify.models.NotificationTypes
 
-class FragmentSettings : Fragment(){
+class FragmentSettings : Fragment() {
 
     private lateinit var spinnerNotificationMode: Spinner
     private lateinit var switchStartOnBoot: Switch
@@ -33,8 +33,8 @@ class FragmentSettings : Fragment(){
     private val neededPermissions = listOf(Manifest.permission.WRITE_SECURE_SETTINGS)
 
 
-    companion object{
-        fun newInstance(): FragmentSettings{
+    companion object {
+        fun newInstance(): FragmentSettings {
             return FragmentSettings()
         }
     }
@@ -61,87 +61,119 @@ class FragmentSettings : Fragment(){
         updateData(view.context)
 
 
-        spinnerNotificationMode.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                if(sharedPrefs.getInt(PrefsKeys.SELECTED_NOTIFICATION_MODE) != position && KspBroadcastService.state()) showAlert(view!!.context, activity!!.getString(R.string.service_restart_required_title), activity!!.getString(R.string.service_restart_required_content))
-                sharedPrefs.putInt(PrefsKeys.SELECTED_NOTIFICATION_MODE, position)
+        spinnerNotificationMode.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    if (sharedPrefs.getInt(PrefsKeys.SELECTED_NOTIFICATION_MODE) != position && KspBroadcastService.state()) showAlert(
+                        view!!.context,
+                        activity!!.getString(R.string.service_restart_required_title),
+                        activity!!.getString(R.string.service_restart_required_content)
+                    )
+                    sharedPrefs.putInt(PrefsKeys.SELECTED_NOTIFICATION_MODE, position)
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    TODO("Not yet implemented")
+                }
             }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
+        spinnerDelayAfterDetect.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    sharedPrefs.putInt(PrefsKeys.DELAY_AFTER_DETECT, position)
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    TODO("Not yet implemented")
+                }
             }
+
+        switchStartOnBoot.setOnCheckedChangeListener { button, b ->
+            switchStartOnBootChange(
+                button.context,
+                b
+            )
         }
-
-        spinnerDelayAfterDetect.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                sharedPrefs.putInt(PrefsKeys.DELAY_AFTER_DETECT, position)
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-        }
-
-        switchStartOnBoot.setOnCheckedChangeListener { button, b -> switchStartOnBootChange(button.context, b)}
         buttonHowToGrant.setOnClickListener { v -> buttonHowToGrantClick(v) }
         buttonRestoreDefault.setOnClickListener { v -> buttonRestoreDefaultClick(v) }
     }
 
-    private fun buttonRestoreDefaultClick(view: View){
-        if(sharedPrefs.getBoolean(PrefsKeys.PERMISSIONS_GRANTED)) {
+    private fun buttonRestoreDefaultClick(view: View) {
+        if (sharedPrefs.getBoolean(PrefsKeys.PERMISSIONS_GRANTED)) {
             KspFaceDetection().restoreDefaultNotificationSettings()
             Toast.makeText(view.context, "Restored!", Toast.LENGTH_SHORT).show()
-        }
-        else{
+        } else {
             Toast.makeText(view.context, "Grant permissions to do this!", Toast.LENGTH_SHORT).show()
         }
     }
-    private fun buttonHowToGrantClick(view: View){
+
+    private fun buttonHowToGrantClick(view: View) {
         MaterialAlertDialogBuilder(view.context)
             .setTitle(activity!!.getString(R.string.how_to_grant_title))
             .setMessage(activity!!.getString(R.string.how_to_grant_content))
             .show()
     }
 
-    private fun switchStartOnBootChange(context: Context, newState: Boolean){
+    private fun switchStartOnBootChange(context: Context, newState: Boolean) {
         sharedPrefs.putBoolean(PrefsKeys.START_AT_BOOT, newState)
         updateData(context)
 
     }
-    private fun updateDataDelayAfterDetect(context: Context){
-        val dadAdapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, convertDelayAfterUnlockTypesToList())
+
+    private fun updateDataDelayAfterDetect(context: Context) {
+        val dadAdapter = ArrayAdapter(
+            context,
+            android.R.layout.simple_spinner_dropdown_item,
+            convertDelayAfterUnlockTypesToList()
+        )
         spinnerDelayAfterDetect.adapter = dadAdapter
         var dadId = sharedPrefs.getInt(PrefsKeys.DELAY_AFTER_DETECT)
-        if(dadId > DelayAfterDetectTypes.size) dadId = 0
+        if (dadId > DelayAfterDetectTypes.size) dadId = 0
         spinnerDelayAfterDetect.setSelection(dadId)
     }
-    private fun updateDataNotificationMode(context: Context){
+
+    private fun updateDataNotificationMode(context: Context) {
         //NOTIFICATION MODE SELECT
-        val notModAdapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, convertNotificationTypesToList() )
+        val notModAdapter = ArrayAdapter(
+            context,
+            android.R.layout.simple_spinner_dropdown_item,
+            convertNotificationTypesToList()
+        )
         spinnerNotificationMode.adapter = notModAdapter
         var notModeId = sharedPrefs.getInt(PrefsKeys.SELECTED_NOTIFICATION_MODE)
-        if(notModeId > NotificationTypes.size) notModeId = 0
+        if (notModeId > NotificationTypes.size) notModeId = 0
         spinnerNotificationMode.setSelection(notModeId)
     }
 
-    private fun updateDataStartOnBoot(){
+    private fun updateDataStartOnBoot() {
         //START AT BOOT
         val startAtBoot = sharedPrefs.getBoolean(PrefsKeys.START_AT_BOOT)
         switchStartOnBoot.isChecked = startAtBoot
-        if(startAtBoot) switchStartOnBoot.text =activity!!.getString(R.string.start_on_boot_switch_on)
+        if (startAtBoot) switchStartOnBoot.text =
+            activity!!.getString(R.string.start_on_boot_switch_on)
         else switchStartOnBoot.text = activity!!.getString(R.string.start_on_boot_switch_off)
     }
 
-    private fun updateDataMissingPerms(){
+    private fun updateDataMissingPerms() {
         //MISSING PERMISSIONS
         val missingPermissions = arrayListOf<String>()
-        for(i in neededPermissions){
-            if(!permissionHelper.isPermissionGranted(i)){
+        for (i in neededPermissions) {
+            if (!permissionHelper.isPermissionGranted(i)) {
                 missingPermissions.add(i)
             }
         }
 
-        if(missingPermissions.size > 0) { //There are still missing permissions
+        if (missingPermissions.size > 0) { //There are still missing permissions
             var permissionText = "Missing:\n"
             for (p in missingPermissions) {
                 permissionText += "${p}\n"
@@ -149,24 +181,27 @@ class FragmentSettings : Fragment(){
             permissionsStatus.text = permissionText
             buttonHowToGrant.visibility = View.VISIBLE
             sharedPrefs.putBoolean(PrefsKeys.PERMISSIONS_GRANTED, false)
-        }
-        else{
+        } else {
             permissionsStatus.text = activity!!.getString(R.string.permissions_granted)
             sharedPrefs.putBoolean(PrefsKeys.PERMISSIONS_GRANTED, true)
-            buttonHowToGrant.visibility =View.GONE
+            buttonHowToGrant.visibility = View.GONE
 
         }
     }
 
-    private fun updateDataCompCheck(context: Context){
+    private fun updateDataCompCheck(context: Context) {
 
-        if(CompatibilityChecker().isDeviceBlacklisted(context) && !sharedPrefs.getBoolean(PrefsKeys.COMP_CHECK_SEEN)){
-            showAlert(context, activity!!.getString(R.string.device_unsupported_title), CompatibilityChecker().getReason(context))
+        if (CompatibilityChecker().isDeviceBlacklisted(context) && !sharedPrefs.getBoolean(PrefsKeys.COMP_CHECK_SEEN)) {
+            showAlert(
+                context,
+                activity!!.getString(R.string.device_unsupported_title),
+                CompatibilityChecker().getReason(context)
+            )
             sharedPrefs.putBoolean(PrefsKeys.COMP_CHECK_SEEN, true)
         }
     }
 
-    private fun showAlert(context: Context, title: String, content: String){
+    private fun showAlert(context: Context, title: String, content: String) {
         MaterialAlertDialogBuilder(context)
             .setTitle(title)
             .setMessage(content)
@@ -174,7 +209,7 @@ class FragmentSettings : Fragment(){
             .show()
     }
 
-    private fun updateData(context: Context){
+    private fun updateData(context: Context) {
 
         updateDataNotificationMode(context)
         updateDataStartOnBoot()
@@ -182,16 +217,18 @@ class FragmentSettings : Fragment(){
         updateDataCompCheck(context)
         updateDataDelayAfterDetect(context)
     }
-    private fun convertDelayAfterUnlockTypesToList(): List<String>{
+
+    private fun convertDelayAfterUnlockTypesToList(): List<String> {
         val toReturnList = arrayListOf<String>()
-        for(daut in DelayAfterDetectTypes){
+        for (daut in DelayAfterDetectTypes) {
             toReturnList.add(daut.readable)
         }
         return toReturnList
     }
-    private fun convertNotificationTypesToList(): List<String>{
+
+    private fun convertNotificationTypesToList(): List<String> {
         val toReturnList = arrayListOf<String>()
-        for(nt in NotificationTypes){
+        for (nt in NotificationTypes) {
             toReturnList.add(nt.name)
         }
         return toReturnList

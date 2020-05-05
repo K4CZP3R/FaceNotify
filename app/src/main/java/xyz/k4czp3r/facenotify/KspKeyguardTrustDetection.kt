@@ -7,6 +7,7 @@ class KspKeyguardTrustDetection {
     fun isDeviceTrusted(): Boolean {
         val keyguardManager =
             FaceNotify.instance.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+
         return !keyguardManager.isDeviceLocked
     }
 

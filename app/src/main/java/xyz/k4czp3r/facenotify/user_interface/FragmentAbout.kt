@@ -14,27 +14,31 @@ import xyz.k4czp3r.facenotify.R
 class FragmentAbout : Fragment(), PurchasesUpdatedListener {
     private val tagName = FragmentAbout::class.qualifiedName
     private lateinit var billingClient: BillingClient
-    private val skuList = listOf("support_the_creator_cocacola", "support_the_creator_eat", "support_the_creator_change")
+    private val skuList = listOf(
+        "support_the_creator_cocacola",
+        "support_the_creator_eat",
+        "support_the_creator_change"
+    )
 
-    private lateinit var chipCola : Chip
+    private lateinit var chipCola: Chip
     private lateinit var chipEat: Chip
     private lateinit var chipChange: Chip
 
 
-    companion object{
-        fun newInstance(): FragmentAbout{
+    companion object {
+        fun newInstance(): FragmentAbout {
             return FragmentAbout()
         }
     }
 
-    private fun setupBillingClient(context: Context){
+    private fun setupBillingClient(context: Context) {
         billingClient = BillingClient.newBuilder(context)
             .enablePendingPurchases()
             .setListener(this)
             .build()
         billingClient.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(p0: BillingResult?) {
-                if(p0?.responseCode == BillingClient.BillingResponseCode.OK){
+                if (p0?.responseCode == BillingClient.BillingResponseCode.OK) {
                     Log.i(tagName, "Setup billing ready")
                     loadAllSKUs()
                     //Setup ok
@@ -69,7 +73,7 @@ class FragmentAbout : Fragment(), PurchasesUpdatedListener {
                         }
                         "support_the_creator_eat" -> {
                             chipEat.text = "${skuDetails.price} ${skuDetails.priceCurrencyCode}"
-                            chipEat.setOnClickListener{
+                            chipEat.setOnClickListener {
                                 billingClient.launchBillingFlow(activity, billingFlowParams.build())
                             }
 
@@ -103,6 +107,7 @@ class FragmentAbout : Fragment(), PurchasesUpdatedListener {
     override fun onPurchasesUpdated(p0: BillingResult?, p1: MutableList<Purchase>?) {
 
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         chipChange = view.findViewById(R.id.chip_change)

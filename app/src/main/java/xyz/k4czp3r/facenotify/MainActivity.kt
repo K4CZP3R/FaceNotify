@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         tabLayout = findViewById(R.id.am_tab_layout)
         tabLayout.setupWithViewPager(viewPager)
 
-        for(page in pages){
+        for (page in pages) {
             tabLayout.getTabAt(page.getPagePosition())?.setIcon(page.getPageIcon())
             tabLayout.getTabAt(page.getPagePosition())?.text = page.getPageName()
         }
@@ -58,7 +58,8 @@ class MainActivity : AppCompatActivity() {
 
 
     class KspPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(
-        fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+        fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+    ) {
         private val tagName = KspPagerAdapter::class.qualifiedName
 
         override fun getCount(): Int {
@@ -66,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun getItem(position: Int): Fragment {
-            Log.v(tagName, String.format("Getting item no.%s",position))
+            Log.v(tagName, String.format("Getting item no.%s", position))
             return when (position) {
                 0 -> FragmentSummary.newInstance()
                 1 -> FragmentSettings.newInstance()
@@ -76,6 +77,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
         override fun getPageTitle(position: Int): CharSequence? {
             Log.v(tagName, String.format("Getting page title of no.%s", position))
             return position.toString()
